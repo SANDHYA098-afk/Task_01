@@ -1,0 +1,122 @@
+[
+  {
+    "question": "Hi",
+    "answer": "Hello! Welcome to SupportAI. How can I assist you today? I'm here to help you with any questions about our platform."
+  },
+  {
+    "question": "Hello",
+    "answer": "Hi there! I'm your AI support assistant. Feel free to ask me anything about our platform, features, or documentation. I'm here to help!"
+  },
+  {
+    "question": "Hey",
+    "answer": "Hey! Great to see you. What can I help you with today? I can answer questions about our AI assistant, RAG technology, or any other features."
+  },
+  {
+    "question": "What is this platform?",
+    "answer": "SupportAI is an AI-powered support assistant platform that uses RAG (Retrieval-Augmented Generation) technology to provide instant, accurate answers from our documentation. It helps users find information quickly without searching through lengthy manuals."
+  },
+  {
+    "question": "How does the AI assistant work?",
+    "answer": "Our AI assistant uses RAG technology which combines retrieval-based and generation-based approaches. It searches through our knowledge base using semantic similarity, retrieves relevant documents, and generates contextual responses. This ensures accurate and relevant answers to your questions."
+  },
+  {
+    "question": "What is RAG?",
+    "answer": "RAG stands for Retrieval-Augmented Generation. It's an AI technique that combines information retrieval with text generation. When you ask a question, the system first retrieves relevant information from a knowledge base, then uses that context to generate an accurate, grounded response."
+  },
+  {
+    "question": "How do I get started?",
+    "answer": "Getting started is easy! Simply create an account using the signup page, then log in to access the dashboard. From there, you can use the Q&A chatbot to ask questions and get instant answers from our AI assistant."
+  },
+  {
+    "question": "What features are available?",
+    "answer": "SupportAI offers: 24/7 AI-powered support, instant responses from documentation, semantic search using vector embeddings, chat history, suggested questions, dark/light theme options, mobile-responsive design, and secure user authentication."
+  },
+  {
+    "question": "How do I reset my password?",
+    "answer": "Currently, password reset is handled through the logout and re-registration process. For security reasons, we recommend creating a new account if you've forgotten your password. Contact support for account recovery assistance."
+  },
+  {
+    "question": "Is my data secure?",
+    "answer": "Yes, security is our priority. We use SHA-256 password hashing, secure authentication protocols, and your data is stored locally in your browser. We don't share your information with third parties."
+  },
+  {
+    "question": "What technologies power this system?",
+    "answer": "Our system is built with: Next.js for the frontend, FastAPI for the backend, LangChain for AI orchestration, FAISS for vector similarity search, HuggingFace embeddings for semantic understanding, and Tailwind CSS for styling."
+  },
+  {
+    "question": "How accurate are the responses?",
+    "answer": "Our AI provides highly accurate responses by using RAG technology with a minimum similarity threshold. If the system can't find a relevant answer in the documentation, it will let you know rather than providing incorrect information."
+  },
+  {
+    "question": "Can I integrate this with my app?",
+    "answer": "Yes! Our API provides RESTful endpoints for chat, login, and signup. You can integrate SupportAI into your applications using our backend API. Check our documentation for API details and integration guides."
+  },
+  {
+    "question": "What is LangChain?",
+    "answer": "LangChain is an open-source framework for building applications with large language models. It provides tools for document loading, text splitting, embedding generation, and vector storage, making it easier to build RAG applications like SupportAI."
+  },
+  {
+    "question": "How does the chatbot work?",
+    "answer": "The chatbot processes your question through several steps: 1) Your question is converted to a vector embedding, 2) FAISS searches for similar content in our knowledge base, 3) The most relevant documents are retrieved, 4) A response is generated based on the retrieved context."
+  },
+  {
+    "question": "What is FAISS?",
+    "answer": "FAISS (Facebook AI Similarity Search) is a library for efficient similarity search and clustering of dense vectors. It allows us to quickly find the most relevant documents by comparing semantic embeddings, enabling fast and accurate responses."
+  },
+  {
+    "question": "How do I contact support?",
+    "answer": "You can reach our support team through the Q&A chatbot for instant answers. For more complex issues, please email us at support@supportai.com. We typically respond within 24 hours on business days."
+  },
+  {
+    "question": "What are the system requirements?",
+    "answer": "SupportAI runs in any modern web browser. We recommend Chrome, Firefox, Safari, or Edge (latest versions). The platform is fully responsive and works on desktop, tablet, and mobile devices. No software installation required."
+  },
+  {
+    "question": "Is there a mobile app?",
+    "answer": "Currently, SupportAI is a web-based platform optimized for mobile browsers. The responsive design ensures a seamless experience on smartphones and tablets. A dedicated mobile app may be released in the future."
+  },
+  {
+    "question": "How do I navigate the platform?",
+    "answer": "Use the navigation bar at the top to access different sections. The menu icon opens a sidebar with additional options. From the home page, click 'Open Q&A' to start chatting with the AI assistant."
+  },
+  {
+    "question": "What is vector embedding?",
+    "answer": "Vector embedding is a way to represent text as numerical vectors. Similar meanings end up close together in vector space. This allows our AI to understand the semantic meaning of your questions and find relevant answers, even if exact keywords don't match."
+  },
+  {
+    "question": "Can I see my chat history?",
+    "answer": "Chat history is maintained during your current session. For privacy, conversations are not permanently stored on our servers. Each new session starts fresh, ensuring your conversations remain private."
+  },
+  {
+    "question": "What is semantic search?",
+    "answer": "Semantic search understands the meaning behind your query, not just keywords. Instead of matching exact words, it finds content with similar meaning. This means you can ask questions naturally and still get relevant answers."
+  },
+  {
+    "question": "How do I change the theme?",
+    "answer": "Click the menu icon (three horizontal lines) in the navigation bar. In the sidebar, you'll find a theme toggle button with sun/moon icons. Click to switch between dark mode (black with neon green) and light mode (white with soft green)."
+  },
+  {
+    "question": "What is hallucination prevention?",
+    "answer": "Hallucination prevention ensures the AI only provides answers based on actual documentation. We use similarity thresholds - if no relevant information is found, the system returns 'Sorry, I couldn't find an answer for that' instead of making up information."
+  },
+  {
+    "question": "How is my password stored?",
+    "answer": "Your password is securely hashed using SHA-256 encryption before storage. We never store plain-text passwords. This means even our system administrators cannot see your actual password, ensuring your account security."
+  },
+  {
+    "question": "Can I use the API?",
+    "answer": "Yes! Our REST API provides endpoints at /login, /signup, and /chat. The API runs on localhost:8000 by default. Use POST requests with JSON payloads. Check our API documentation for detailed request/response formats."
+  },
+  {
+    "question": "What is document chunking?",
+    "answer": "Document chunking splits large documents into smaller, manageable pieces. This improves search accuracy by allowing the system to retrieve specific relevant sections rather than entire documents. We typically use chunks of 500-1000 characters."
+  },
+  {
+    "question": "How fast is the response time?",
+    "answer": "Response times are typically under 2 seconds for most queries. The FAISS vector search is highly optimized, and our system processes questions in real-time. Complex queries may take slightly longer depending on the amount of relevant context."
+  },
+  {
+    "question": "Is there a free tier?",
+    "answer": "Yes! SupportAI is completely free to use. There are no subscription fees, usage limits, or hidden charges. We believe everyone should have access to quality AI-powered support."
+  }
+]

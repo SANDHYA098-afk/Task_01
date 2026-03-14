@@ -1,0 +1,424 @@
+# NeuroStack -- Generative AI & Backend Developer Internship Hackathon Guide
+
+## Overview
+
+This project is part of the **NeuroStack GenAI Build Sprint**, a 7‑day
+challenge to build a **production‑ready mini Generative AI application**
+using only **free tools**.
+
+The objective is to demonstrate:
+
+-   AI engineering capability
+-   Backend development
+-   Problem‑solving skills
+-   Product thinking
+-   Deployment and documentation
+
+Participants must build a complete working system with frontend,
+backend, GenAI workflow, and deployment.
+
+------------------------------------------------------------------------
+
+# Project Goal
+
+Build a **GenAI application** consisting of:
+
+-   **React.js frontend**
+-   **FastAPI or Django backend**
+-   **Signup / Login authentication**
+-   **LangChain-based GenAI pipeline**
+-   **RAG (Retrieval Augmented Generation) workflow**
+-   **Deployment on Hugging Face Spaces**
+-   **Complete README documentation**
+
+------------------------------------------------------------------------
+
+# Mandatory Tech Stack
+
+Frontend: - React.js
+
+Backend: - FastAPI or Django
+
+AI Framework: - LangChain
+
+Vector Database: - FAISS or Chroma
+
+Deployment: - Hugging Face Spaces
+
+Models: - Open‑source models from Hugging Face - Llama - Mistral - Gemma
+
+------------------------------------------------------------------------
+
+# Free‑Tools Only Rule
+
+Allowed:
+
+-   Hugging Face open‑source models
+-   LangChain
+-   FAISS / Chroma
+-   React.js
+-   FastAPI / Django
+-   Hugging Face Spaces deployment
+
+Not Allowed (Disqualification):
+
+-   OpenAI API
+-   Any paid API or model
+-   Paid cloud services
+-   Paid vector databases
+-   Any service requiring a credit card
+
+------------------------------------------------------------------------
+
+# Selected Problem Statement
+
+## SaaS Support Copilot (RAG System)
+
+Users often struggle to search through long documentation.
+
+This project builds an **AI support assistant** that retrieves relevant
+information from documentation and generates grounded answers.
+
+------------------------------------------------------------------------
+
+# Dataset Requirement
+
+Create a dataset containing:
+
+-   20--50 FAQ or documentation items
+
+Stored in:
+
+-   JSON file
+
+------------------------------------------------------------------------
+
+# RAG Pipeline Architecture
+
+The system must include:
+
+1.  Document ingestion
+2.  Text chunking
+3.  Embedding generation
+4.  Vector database storage
+5.  Hybrid retrieval
+6.  Context validation
+7.  Response generation
+
+Components:
+
+-   Embeddings
+-   FAISS / Chroma vector database
+-   Hybrid retrieval (BM25 + embeddings)
+-   Answer validation layer
+
+------------------------------------------------------------------------
+
+# Hallucination Prevention
+
+Implement safeguards such as:
+
+-   Minimum similarity score threshold
+-   Reject low‑context queries
+-   Rephrase prompts
+-   Return fallback response when context is insufficient
+
+Example fallback message:
+
+"Sorry, I couldn't find a relevant answer in the documentation."
+
+------------------------------------------------------------------------
+
+# Required UI Features
+
+The UI must contain **three main pages**.
+
+------------------------------------------------------------------------
+
+# 1. Login / Signup Page
+
+Initial page of the application.
+
+### Desktop Layout
+
+Left side: - Welcome message
+
+Right side: - Login card
+
+Example text:
+
+Welcome Back
+
+Fields: - Email - Password
+
+Button: - Login
+
+Link: - Signup
+
+### Signup Animation
+
+When the user clicks **Signup**:
+
+-   Card slides **from right to left**
+-   Signup form appears on the **left**
+-   Message appears on the **right**
+
+Signup fields:
+
+-   Name
+-   Email
+-   Password
+
+------------------------------------------------------------------------
+
+# Mobile Layout
+
+Top: - Welcome message
+
+Below: - Login / Signup form
+
+The layout should be fully **responsive**.
+
+------------------------------------------------------------------------
+
+# 2. Home Page
+
+After login, the user first sees a **Hero Section**.
+
+### Hero Section
+
+Features:
+
+-   Large headline
+-   Short description
+-   Stylish UI
+
+Bottom left corner:
+
+Scroll indicator:
+
+"Scroll Down"
+
+### Special Behavior
+
+When scrolling:
+
+-   Hero section disappears
+-   Main page loads **in the same screen space**
+-   User cannot scroll back to hero
+
+Hero appears again only after:
+
+-   Page refresh
+-   New login
+
+------------------------------------------------------------------------
+
+# Home Page (Main Section)
+
+Contains a **Navigation Bar**.
+
+Left side:
+
+Menu icon
+
+Center:
+
+Logo / Website name
+
+Right side:
+
+-   Home
+-   About Us
+-   Q&A (Chatbot page)
+
+------------------------------------------------------------------------
+
+# Main Content Section
+
+Includes:
+
+-   Headings
+-   Description about the system
+-   Button:
+
+Open Q&A
+
+Clicking opens the chatbot page.
+
+------------------------------------------------------------------------
+
+# Menu Panel
+
+Menu should contain:
+
+-   About Us
+-   Q&A
+-   Theme switch
+
+Bottom of menu:
+
+-   User profile icon
+-   Username
+
+------------------------------------------------------------------------
+
+# Theme Toggle
+
+Theme toggle should use icons:
+
+Light mode: ☀ Sun icon
+
+Dark mode: 🌙 Moon icon
+
+No switch button --- only icons.
+
+------------------------------------------------------------------------
+
+# Color Themes
+
+Dark Theme:
+
+-   Black background
+-   Neon green accents
+
+Light Theme:
+
+-   White / soft white
+-   Pale green accents
+
+------------------------------------------------------------------------
+
+# 3. Chatbot Page
+
+Contains two sections.
+
+## Chat Interface
+
+Features:
+
+-   Rounded chat bubbles
+-   Message input box
+-   Enter key sends message
+
+------------------------------------------------------------------------
+
+## Suggested Questions
+
+Display **15 suggested queries**.
+
+When clicked:
+
+-   Automatically fills the input box
+-   Pressing Enter sends the query
+
+------------------------------------------------------------------------
+
+# Chatbot Data
+
+Use a JSON dataset containing:
+
+-   30 predefined Q&A items
+
+Examples:
+
+-   Hi
+-   Hello
+-   What is this platform?
+-   How does the chatbot work?
+
+If a question is outside the dataset:
+
+Return:
+
+"Sorry, I couldn't find an answer for that."
+
+------------------------------------------------------------------------
+
+# Functional Requirements
+
+The application must include:
+
+1.  Smooth animations
+2.  Mobile responsiveness
+3.  Login / Signup authentication
+4.  Lightweight backend
+5.  Clean UI
+6.  Error handling
+
+------------------------------------------------------------------------
+
+# Backend Requirements
+
+API endpoints must include:
+
+POST /signup
+
+POST /login
+
+POST /chat
+
+------------------------------------------------------------------------
+
+# Deployment Requirements
+
+Frontend:
+
+-   Vercel / Netlify / Hugging Face
+
+Backend:
+
+-   Hugging Face Spaces (Mandatory)
+
+------------------------------------------------------------------------
+
+# Submission Requirements
+
+The final submission must include:
+
+1.  Live Frontend URL
+
+2.  Backend API URL
+
+3.  GitHub repository containing:
+
+    -   Frontend code
+    -   Backend code
+    -   requirements.txt
+    -   Clean folder structure
+
+4.  README documentation including:
+
+-   Architecture explanation
+-   Setup instructions
+-   Sample prompts
+-   Demo video
+-   GenAI workflow explanation
+-   Hallucination reduction techniques
+-   Future improvements
+
+------------------------------------------------------------------------
+
+# Evaluation Criteria
+
+Projects will be evaluated on:
+
+1.  Problem understanding
+2.  GenAI workflow quality
+3.  Backend architecture
+4.  UI / UX design
+5.  Documentation quality
+
+------------------------------------------------------------------------
+
+# Important Advice
+
+To succeed:
+
+-   Plan architecture before coding
+-   Test the full pipeline (frontend → backend → AI)
+-   Deploy early
+-   Write a strong README
+
+A well‑built prototype using only free tools demonstrates real **GenAI
+engineering capability**.
