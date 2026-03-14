@@ -223,40 +223,40 @@ export default function LoginPage() {
                   </div>
                 )}
 
-                <form onSubmit={handleLogin} className="space-y-[15px]">
+                <form onSubmit={handleLogin} className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-zinc-400 mb-[10px]">
+                    <label className="block text-sm font-medium text-zinc-400 mb-2">
                       Email Address
                     </label>
                     <input
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full px-5 py-4 rounded-xl border border-zinc-700 bg-zinc-800/50 text-white placeholder-zinc-500 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-300"
+                      className="w-full px-4 py-3.5 rounded-xl border border-zinc-700 bg-zinc-800/50 text-white placeholder-zinc-500 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-300"
                       placeholder="Enter your email"
                       required
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-zinc-400 mb-[10px]">
+                    <label className="block text-sm font-medium text-zinc-400 mb-2">
                       Password
                     </label>
                     <input
                       type="password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="w-full px-5 py-4 rounded-xl border border-zinc-700 bg-zinc-800/50 text-white placeholder-zinc-500 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-300"
+                      className="w-full px-4 py-3.5 rounded-xl border border-zinc-700 bg-zinc-800/50 text-white placeholder-zinc-500 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-300"
                       placeholder="Enter your password"
                       required
                     />
                   </div>
 
-                  <div className="pt-[10px]">
+                  <div className="pt-2">
                     <button
                       type="submit"
                       disabled={loading}
-                      className="w-full py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-xl hover:from-green-400 hover:to-emerald-500 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-green-500/25 hover:shadow-green-500/40"
+                      className="w-full py-3.5 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-xl hover:from-green-400 hover:to-emerald-500 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-green-500/25 hover:shadow-green-500/40"
                     >
                       {loading ? (
                         <span className="flex items-center justify-center gap-2">
@@ -326,54 +326,54 @@ export default function LoginPage() {
                   </div>
                 )}
 
-                <form onSubmit={handleSignup} className="space-y-[15px]">
+                <form onSubmit={handleSignup} className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-zinc-400 mb-[10px]">
+                    <label className="block text-sm font-medium text-zinc-400 mb-2">
                       Full Name
                     </label>
                     <input
                       type="text"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="w-full px-5 py-4 rounded-xl border border-zinc-700 bg-zinc-800/50 text-white placeholder-zinc-500 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-300"
+                      className="w-full px-4 py-3.5 rounded-xl border border-zinc-700 bg-zinc-800/50 text-white placeholder-zinc-500 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-300"
                       placeholder="Enter your name"
                       required
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-zinc-400 mb-[10px]">
+                    <label className="block text-sm font-medium text-zinc-400 mb-2">
                       Email Address
                     </label>
                     <input
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full px-5 py-4 rounded-xl border border-zinc-700 bg-zinc-800/50 text-white placeholder-zinc-500 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-300"
+                      className="w-full px-4 py-3.5 rounded-xl border border-zinc-700 bg-zinc-800/50 text-white placeholder-zinc-500 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-300"
                       placeholder="Enter your email"
                       required
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-zinc-400 mb-[10px]">
+                    <label className="block text-sm font-medium text-zinc-400 mb-2">
                       Password
                     </label>
                     <input
                       type="password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="w-full px-5 py-4 rounded-xl border border-zinc-700 bg-zinc-800/50 text-white placeholder-zinc-500 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-300"
+                      className="w-full px-4 py-3.5 rounded-xl border border-zinc-700 bg-zinc-800/50 text-white placeholder-zinc-500 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-300"
                       placeholder="Create a password"
                       required
                     />
                   </div>
 
-                  <div className="pt-[10px]">
+                  <div className="pt-2">
                     <button
                       type="submit"
                       disabled={loading}
-                      className="w-full py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-xl hover:from-green-400 hover:to-emerald-500 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-green-500/25 hover:shadow-green-500/40"
+                      className="w-full py-3.5 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-xl hover:from-green-400 hover:to-emerald-500 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-green-500/25 hover:shadow-green-500/40"
                     >
                       {loading ? (
                         <span className="flex items-center justify-center gap-2">
@@ -491,94 +491,94 @@ export default function LoginPage() {
             )}
 
             {isSignup ? (
-              <form onSubmit={handleSignup} className="space-y-[15px]">
+              <form onSubmit={handleSignup} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-zinc-400 mb-[10px]">
+                  <label className="block text-sm font-medium text-zinc-400 mb-2">
                     Full Name
                   </label>
                   <input
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full px-4 py-4 rounded-xl border border-zinc-700 bg-zinc-800/50 text-white placeholder-zinc-500 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-300"
+                    className="w-full px-4 py-3.5 rounded-xl border border-zinc-700 bg-zinc-800/50 text-white placeholder-zinc-500 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-300"
                     placeholder="Enter your name"
                     required
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-zinc-400 mb-[10px]">
+                  <label className="block text-sm font-medium text-zinc-400 mb-2">
                     Email Address
                   </label>
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-4 py-4 rounded-xl border border-zinc-700 bg-zinc-800/50 text-white placeholder-zinc-500 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-300"
+                    className="w-full px-4 py-3.5 rounded-xl border border-zinc-700 bg-zinc-800/50 text-white placeholder-zinc-500 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-300"
                     placeholder="Enter your email"
                     required
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-zinc-400 mb-[10px]">
+                  <label className="block text-sm font-medium text-zinc-400 mb-2">
                     Password
                   </label>
                   <input
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full px-4 py-4 rounded-xl border border-zinc-700 bg-zinc-800/50 text-white placeholder-zinc-500 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-300"
+                    className="w-full px-4 py-3.5 rounded-xl border border-zinc-700 bg-zinc-800/50 text-white placeholder-zinc-500 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-300"
                     placeholder="Create a password"
                     required
                   />
                 </div>
 
-                <div className="pt-[10px]">
+                <div className="pt-2">
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-xl hover:from-green-400 hover:to-emerald-500 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-green-500/25"
+                    className="w-full py-3.5 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-xl hover:from-green-400 hover:to-emerald-500 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-green-500/25"
                   >
                     {loading ? "Creating account..." : "Create Account"}
                   </button>
                 </div>
               </form>
             ) : (
-              <form onSubmit={handleLogin} className="space-y-[15px]">
+              <form onSubmit={handleLogin} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-zinc-400 mb-[10px]">
+                  <label className="block text-sm font-medium text-zinc-400 mb-2">
                     Email Address
                   </label>
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-4 py-4 rounded-xl border border-zinc-700 bg-zinc-800/50 text-white placeholder-zinc-500 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-300"
+                    className="w-full px-4 py-3.5 rounded-xl border border-zinc-700 bg-zinc-800/50 text-white placeholder-zinc-500 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-300"
                     placeholder="Enter your email"
                     required
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-zinc-400 mb-[10px]">
+                  <label className="block text-sm font-medium text-zinc-400 mb-2">
                     Password
                   </label>
                   <input
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full px-4 py-4 rounded-xl border border-zinc-700 bg-zinc-800/50 text-white placeholder-zinc-500 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-300"
+                    className="w-full px-4 py-3.5 rounded-xl border border-zinc-700 bg-zinc-800/50 text-white placeholder-zinc-500 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-300"
                     placeholder="Enter your password"
                     required
                   />
                 </div>
 
-                <div className="pt-[10px]">
+                <div className="pt-2">
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-xl hover:from-green-400 hover:to-emerald-500 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-green-500/25"
+                    className="w-full py-3.5 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-xl hover:from-green-400 hover:to-emerald-500 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-green-500/25"
                   >
                     {loading ? "Signing in..." : "Login"}
                   </button>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 // Typing animation component
@@ -41,11 +41,9 @@ function TypingText({ text, speed = 50, delay = 0 }: { text: string; speed?: num
 
 export default function HomePage() {
   const [user, setUser] = useState<{ name: string; email: string } | null>(null);
-  const [showHero, setShowHero] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isDark, setIsDark] = useState(true);
   const [mounted, setMounted] = useState(false);
-  const mainRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -57,26 +55,11 @@ export default function HomePage() {
       router.push("/login");
     }
     
-    // Check for saved theme preference
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "light") {
       setIsDark(false);
     }
   }, [router]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (mainRef.current) {
-        const scrollY = window.scrollY;
-        if (scrollY > 100 && showHero) {
-          setShowHero(false);
-        }
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [showHero]);
 
   const handleLogout = () => {
     localStorage.removeItem("user");
@@ -87,12 +70,6 @@ export default function HomePage() {
     const newTheme = !isDark;
     setIsDark(newTheme);
     localStorage.setItem("theme", newTheme ? "dark" : "light");
-  };
-
-  const scrollToMain = () => {
-    if (mainRef.current) {
-      mainRef.current.scrollIntoView({ behavior: "smooth" });
-    }
   };
 
   if (!user) {
@@ -109,8 +86,6 @@ export default function HomePage() {
   const borderColor = isDark ? 'rgba(34, 197, 94, 0.2)' : 'rgba(34, 197, 94, 0.3)';
   const accentColor = isDark ? 'text-green-400' : 'text-green-600';
   const secondaryText = isDark ? 'text-zinc-400' : 'text-gray-600';
-  const inputBg = isDark ? 'bg-zinc-800/50' : 'bg-white';
-  const inputBorder = isDark ? 'border-zinc-700' : 'border-gray-300';
 
   return (
     <div className={`min-h-screen ${bgColor} ${textColor} transition-colors duration-300`}>
@@ -120,43 +95,11 @@ export default function HomePage() {
         <div className={`absolute -bottom-1/2 -right-1/2 w-full h-full rounded-full blur-3xl ${isDark ? 'bg-gradient-to-tl from-emerald-500/5' : 'bg-gradient-to-tl from-emerald-500/10'}`} />
       </div>
 
-      {/* Hero Section */}
-      {showHero && (
-        <div 
-          className={`fixed inset-0 z-40 flex items-center justify-center transition-opacity duration-500 ${bgColor}`}
-          style={{ opacity: mounted ? 1 : 0 }}
-        >
-          <div className="text-center px-6 max-w-4xl mx-auto">
-            <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm mb-6 ${isDark ? 'bg-green-500/10 border border-green-500/20 text-green-400' : 'bg-green-100 border border-green-200 text-green-600'}`}>
-              <span className={`w-2 h-2 rounded-full animate-pulse ${isDark ? 'bg-green-400' : 'bg-green-500'}`} />
-              AI-Powered Support Assistant
-            </div>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
-              <TypingText text="How can I help you today?" speed={50} delay={300} />
-            </h1>
-            <p className={`text-xl md:text-2xl max-w-2xl mx-auto ${secondaryText}`}>
-              Your intelligent support assistant powered by RAG technology. Get instant answers from our documentation.
-            </p>
-          </div>
-          
-          {/* Scroll Down Indicator */}
-          <div 
-            className="absolute bottom-8 left-8 flex items-center gap-2 cursor-pointer group"
-            onClick={scrollToMain}
-          >
-            <span className={`${secondaryText} text-sm group-hover:${accentColor} transition-colors`}>Scroll Down</span>
-            <svg className={`w-5 h-5 ${accentColor} animate-bounce`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
-          </div>
-        </div>
-      )}
-
-      {/* Navbar */}
+      {/* Navbar - Fixed at top */}
       <nav 
-        className={`fixed top-0 left-0 right-0 z-50 border-b transition-colors duration-300`}
+        className="fixed top-0 left-0 right-0 z-50 border-b"
         style={{
-          background: isDark ? "rgba(9, 9, 11, 0.8)" : "rgba(255, 255, 255, 0.9)",
+          background: isDark ? "rgba(9, 9, 11, 0.95)" : "rgba(255, 255, 255, 0.95)",
           backdropFilter: "blur(20px)",
           WebkitBackdropFilter: "blur(20px)",
           borderColor: borderColor,
@@ -185,9 +128,9 @@ export default function HomePage() {
 
           {/* Navigation Links */}
           <div className="hidden md:flex items-center gap-6">
-            <button onClick={() => router.push("/home")} className={`${secondaryText} hover:${accentColor} transition-colors`}>Home</button>
-            <button className={`${secondaryText} hover:${accentColor} transition-colors`}>About Us</button>
-            <button onClick={() => router.push("/chat")} className={`${secondaryText} hover:${accentColor} transition-colors`}>Q&A</button>
+            <button onClick={() => router.push("/home")} className={`${secondaryText} hover:${accentColor} transition-colors font-medium`}>Home</button>
+            <button className={`${secondaryText} hover:${accentColor} transition-colors font-medium`}>About Us</button>
+            <button onClick={() => router.push("/chat")} className={`${secondaryText} hover:${accentColor} transition-colors font-medium`}>Q&A</button>
           </div>
 
           {/* User Info */}
@@ -197,12 +140,7 @@ export default function HomePage() {
             </span>
             <button
               onClick={handleLogout}
-              className={`px-4 py-2 rounded-xl transition-colors text-sm ${isDark ? 'text-zinc-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}
-              style={{
-                background: isDark ? "rgba(39, 39, 42, 0.6)" : "rgba(229, 231, 235, 0.8)",
-                backdropFilter: "blur(10px)",
-                WebkitBackdropFilter: "blur(10px)",
-              }}
+              className={`px-4 py-2 rounded-xl transition-colors text-sm font-medium ${isDark ? 'text-zinc-300 hover:text-white bg-zinc-800 hover:bg-zinc-700' : 'text-gray-600 hover:text-gray-900 bg-gray-200 hover:bg-gray-300'}`}
             >
               Logout
             </button>
@@ -235,7 +173,7 @@ export default function HomePage() {
 
             <div className="space-y-4">
               <button 
-                onClick={() => { setMenuOpen(false); router.push("/home"); }}
+                onClick={() => { setMenuOpen(false); }}
                 className={`w-full text-left px-4 py-3 rounded-xl transition-colors ${isDark ? 'hover:bg-zinc-800' : 'hover:bg-gray-100'}`}
               >
                 <span className={textColor}>About Us</span>
@@ -295,33 +233,62 @@ export default function HomePage() {
         </>
       )}
 
-      {/* Main Content */}
-      <main ref={mainRef} className={`pt-24 pb-12 px-6 relative ${showHero ? 'opacity-0' : 'opacity-100'} transition-opacity duration-500`}>
-        <div className="max-w-4xl mx-auto">
-          {/* Hero Section */}
-          <div className="text-center mb-16">
-            <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm mb-[15px] ${isDark ? 'bg-green-500/10 border border-green-500/20 text-green-400' : 'bg-green-100 border border-green-200 text-green-600'}`}>
-              <span className={`w-2 h-2 rounded-full animate-pulse ${isDark ? 'bg-green-400' : 'bg-green-500'}`} />
-              AI-Powered Support Assistant
-            </div>
-            <h1 className="text-4xl md:text-6xl font-bold mb-[15px]">
-              How can I help you today?
-            </h1>
-            <p className={`text-xl max-w-2xl mx-auto ${secondaryText}`}>
-              Your intelligent support assistant powered by RAG technology. Get instant answers from our documentation.
-            </p>
+      {/* Hero Section - Static, below navbar */}
+      <section className="relative pt-24 pb-16 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <div 
+            className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm mb-6 ${isDark ? 'bg-green-500/10 border border-green-500/20 text-green-400' : 'bg-green-100 border border-green-200 text-green-600'}`}
+          >
+            <span className={`w-2 h-2 rounded-full animate-pulse ${isDark ? 'bg-green-400' : 'bg-green-500'}`} />
+            AI-Powered Support Assistant
           </div>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+            {mounted ? (
+              <TypingText text="How can I help you today?" speed={50} delay={300} />
+            ) : (
+              "How can I help you today?"
+            )}
+          </h1>
+          <p className={`text-lg md:text-xl max-w-2xl mx-auto ${secondaryText} mb-8`}>
+            Your intelligent support assistant powered by RAG technology. Get instant answers from our documentation.
+          </p>
+          <button
+            onClick={() => router.push("/chat")}
+            className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-xl hover:from-green-400 hover:to-emerald-500 transition-all duration-300 shadow-lg shadow-green-500/25 hover:shadow-green-500/40"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+            </svg>
+            Start Chatting
+          </button>
+        </div>
+      </section>
 
-          {/* Quick Actions */}
-          <div className="grid md:grid-cols-3 gap-[15px] mb-12">
-            {[ 
-              { icon: "M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z", title: "Ask Questions", desc: "Get instant answers from our AI-powered knowledge base." },
-              { icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z", title: "Documentation", desc: "Browse our comprehensive documentation and guides." },
-              { icon: "M13 10V3L4 14h7v7l9-11h-7z", title: "Quick Start", desc: "Get up and running quickly with our setup guide." }
+      {/* Main Content */}
+      <main className="relative pb-16 px-6">
+        <div className="max-w-5xl mx-auto">
+          {/* Feature Cards */}
+          <div className="grid md:grid-cols-3 gap-6 mb-16">
+            {[
+              { 
+                icon: "M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z", 
+                title: "Smart Q&A", 
+                desc: "Ask any question and get instant, accurate answers from our knowledge base." 
+              },
+              { 
+                icon: "M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z", 
+                title: "RAG Technology", 
+                desc: "Powered by Retrieval-Augmented Generation for accurate, contextual responses." 
+              },
+              { 
+                icon: "M13 10V3L4 14h7v7l9-11h-7z", 
+                title: "Lightning Fast", 
+                desc: "Get responses in under 2 seconds with our optimized FAISS vector search." 
+              }
             ].map((item, index) => (
               <div
                 key={index}
-                className="rounded-2xl p-6 cursor-pointer group transition-all duration-300"
+                className="rounded-2xl p-6 cursor-pointer group transition-all duration-300 hover:scale-105"
                 style={{
                   background: cardBg,
                   backdropFilter: "blur(20px)",
@@ -329,32 +296,59 @@ export default function HomePage() {
                   border: `1px solid ${borderColor}`,
                 }}
               >
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-[15px] transition-colors ${isDark ? 'bg-green-500/10 group-hover:bg-green-500/20' : 'bg-green-100 group-hover:bg-green-200'}`}>
-                  <svg className={`w-6 h-6 ${accentColor}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-4 transition-colors ${isDark ? 'bg-green-500/10 group-hover:bg-green-500/20' : 'bg-green-100 group-hover:bg-green-200'}`}>
+                  <svg className={`w-7 h-7 ${accentColor}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={item.icon} />
                   </svg>
                 </div>
-                <h3 className={`text-lg font-semibold mb-[10px] ${textColor}`}>{item.title}</h3>
-                <p className={`text-sm ${secondaryText}`}>{item.desc}</p>
+                <h3 className={`text-xl font-semibold mb-2 ${textColor}`}>{item.title}</h3>
+                <p className={`${secondaryText}`}>{item.desc}</p>
               </div>
             ))}
           </div>
 
-          {/* CTA Button */}
-          <div className="text-center">
-            <button
-              onClick={() => router.push("/chat")}
-              className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-xl hover:from-green-400 hover:to-emerald-500 transition-all duration-300 shadow-lg shadow-green-500/25 hover:shadow-green-500/40"
+          {/* About Section */}
+          <div className="mb-16">
+            <div
+              className="rounded-2xl p-8"
+              style={{
+                background: cardBg,
+                backdropFilter: "blur(20px)",
+                WebkitBackdropFilter: "blur(20px)",
+                border: `1px solid ${borderColor}`,
+              }}
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-              </svg>
-              Open Q&A
-            </button>
+              <h3 className={`text-2xl font-bold mb-4 ${textColor}`}>About This Platform</h3>
+              <p className={`${secondaryText} mb-4 leading-relaxed`}>
+                SupportAI is an AI-powered support assistant built for the NeuroStack Generative AI Internship Hackathon. 
+                It uses cutting-edge RAG (Retrieval-Augmented Generation) technology to provide accurate, contextual answers 
+                from our documentation.
+              </p>
+              <p className={`${secondaryText} leading-relaxed`}>
+                The system is built with Next.js for the frontend, FastAPI for the backend, LangChain for AI orchestration, 
+                FAISS for vector similarity search, and HuggingFace embeddings for semantic understanding.
+              </p>
+            </div>
           </div>
 
-          {/* User Info Card */}
-          <div className="mt-16 max-w-md mx-auto">
+          {/* Q&A CTA Button */}
+          <div className="text-center mb-16">
+            <button
+              onClick={() => router.push("/chat")}
+              className="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold text-lg rounded-2xl hover:from-green-400 hover:to-emerald-500 transition-all duration-300 shadow-xl shadow-green-500/30 hover:shadow-green-500/50 hover:scale-105"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+              </svg>
+              Open Q&A Chat
+            </button>
+            <p className={`mt-4 ${secondaryText}`}>
+              Click to start chatting with our AI assistant
+            </p>
+          </div>
+
+          {/* User Profile Card */}
+          <div className="max-w-md mx-auto">
             <div
               className="rounded-2xl p-6"
               style={{
@@ -364,13 +358,13 @@ export default function HomePage() {
                 border: `1px solid ${borderColor}`,
               }}
             >
-              <h3 className={`text-lg font-semibold mb-[15px] flex items-center gap-2 ${textColor}`}>
+              <h3 className={`text-lg font-semibold mb-4 flex items-center gap-2 ${textColor}`}>
                 <svg className={`w-5 h-5 ${accentColor}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
                 Your Profile
               </h3>
-              <div className="space-y-[15px]">
+              <div className="space-y-3">
                 <div className={`flex justify-between items-center py-2 ${isDark ? 'border-b border-zinc-800' : 'border-b border-gray-200'}`}>
                   <span className={secondaryText}>Name</span>
                   <span className={`font-medium ${textColor}`}>{user.name}</span>

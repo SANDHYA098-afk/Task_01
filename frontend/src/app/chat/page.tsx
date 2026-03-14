@@ -55,13 +55,11 @@ export default function ChatPage() {
       router.push("/login");
     }
 
-    // Check for saved theme preference
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "light") {
       setIsDark(false);
     }
 
-    // Fetch suggested questions
     fetchSuggestedQuestions();
   }, [router]);
 
@@ -158,8 +156,6 @@ export default function ChatPage() {
   const accentColor = isDark ? 'text-green-400' : 'text-green-600';
   const secondaryText = isDark ? 'text-zinc-400' : 'text-gray-600';
   const inputBg = isDark ? 'bg-zinc-800/50' : 'bg-white';
-  const inputBorder = isDark ? 'border-zinc-700' : 'border-gray-300';
-  const messageBg = isDark ? 'bg-zinc-800' : 'bg-gray-200';
 
   return (
     <div className={`min-h-screen ${bgColor} ${textColor} flex flex-col transition-colors duration-300`}>
@@ -173,13 +169,13 @@ export default function ChatPage() {
       <nav 
         className="fixed top-0 left-0 right-0 z-50 border-b"
         style={{
-          background: isDark ? "rgba(9, 9, 11, 0.8)" : "rgba(255, 255, 255, 0.9)",
+          background: isDark ? "rgba(9, 9, 11, 0.95)" : "rgba(255, 255, 255, 0.95)",
           backdropFilter: "blur(20px)",
           WebkitBackdropFilter: "blur(20px)",
           borderColor: borderColor,
         }}
       >
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
           {/* Menu Icon */}
           <button 
             onClick={() => setMenuOpen(!menuOpen)}
@@ -191,26 +187,26 @@ export default function ChatPage() {
           </button>
 
           {/* Logo */}
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg shadow-green-500/20">
-              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg shadow-green-500/20">
+              <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             </div>
-            <span className={`text-xl font-bold ${textColor}`}>SupportAI</span>
+            <span className={`text-lg sm:text-xl font-bold ${textColor}`}>SupportAI</span>
           </div>
 
           {/* Navigation */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <button
               onClick={() => router.push("/home")}
-              className={`px-4 py-2 rounded-xl transition-colors text-sm ${isDark ? 'bg-zinc-800 hover:bg-zinc-700 text-zinc-300' : 'bg-gray-200 hover:bg-gray-300 text-gray-700'}`}
+              className={`px-3 sm:px-4 py-2 rounded-xl transition-colors text-sm font-medium ${isDark ? 'bg-zinc-800 hover:bg-zinc-700 text-zinc-300' : 'bg-gray-200 hover:bg-gray-300 text-gray-700'}`}
             >
               Home
             </button>
             <button
               onClick={handleLogout}
-              className={`px-4 py-2 rounded-xl transition-colors text-sm ${isDark ? 'bg-zinc-800 hover:bg-zinc-700 text-zinc-300' : 'bg-gray-200 hover:bg-gray-300 text-gray-700'}`}
+              className={`px-3 sm:px-4 py-2 rounded-xl transition-colors text-sm font-medium ${isDark ? 'bg-zinc-800 hover:bg-zinc-700 text-zinc-300' : 'bg-gray-200 hover:bg-gray-300 text-gray-700'}`}
             >
               Logout
             </button>
@@ -303,21 +299,21 @@ export default function ChatPage() {
         </>
       )}
 
-      {/* Main Content */}
-      <div className="flex-1 pt-20 flex relative">
+      {/* Main Chat Container */}
+      <div className="flex-1 pt-16 sm:pt-20 flex relative">
         {/* Chat Area */}
-        <div className="flex-1 flex flex-col">
-          {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-6 space-y-4">
+        <div className="flex-1 flex flex-col min-w-0">
+          {/* Messages Container */}
+          <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-4 space-y-4">
             {messages.length === 0 && (
-              <div className={`text-center mt-20 ${secondaryText}`}>
-                <div className={`w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center ${isDark ? 'bg-green-500/10' : 'bg-green-100'}`}>
-                  <svg className={`w-8 h-8 ${accentColor}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className={`text-center mt-12 sm:mt-20 ${secondaryText}`}>
+                <div className={`w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-6 rounded-full flex items-center justify-center ${isDark ? 'bg-green-500/10' : 'bg-green-100'}`}>
+                  <svg className={`w-8 h-8 sm:w-10 sm:h-10 ${accentColor}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                   </svg>
                 </div>
-                <p className="text-lg">Start a conversation with the AI assistant</p>
-                <p className="text-sm mt-2">Type a message or click a suggested question</p>
+                <p className="text-lg sm:text-xl font-medium mb-2">Start a conversation</p>
+                <p className="text-sm">Type a message or click a suggested question below</p>
               </div>
             )}
 
@@ -327,16 +323,16 @@ export default function ChatPage() {
                 className={`flex ${msg.type === "user" ? "justify-end" : "justify-start"} animate-fadeIn`}
               >
                 <div
-                  className={`max-w-[80%] px-5 py-3 rounded-2xl ${
+                  className={`max-w-[85%] sm:max-w-[75%] px-4 sm:px-5 py-3 sm:py-4 ${
                     msg.type === "user"
-                      ? "bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-br-md"
-                      : `${messageBg} ${textColor} rounded-bl-md`
+                      ? "bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-2xl rounded-br-sm"
+                      : `${isDark ? 'bg-zinc-800' : 'bg-gray-200'} ${textColor} rounded-2xl rounded-bl-sm`
                   }`}
                 >
                   {msg.type === "ai" ? (
                     <TypingResponse text={msg.text} speed={15} />
                   ) : (
-                    msg.text
+                    <span className="break-words">{msg.text}</span>
                   )}
                 </div>
               </div>
@@ -344,8 +340,8 @@ export default function ChatPage() {
 
             {loading && (
               <div className="flex justify-start animate-fadeIn">
-                <div className={`${messageBg} px-5 py-3 rounded-2xl rounded-bl-md`}>
-                  <div className="flex gap-1">
+                <div className={`${isDark ? 'bg-zinc-800' : 'bg-gray-200'} px-5 py-4 rounded-2xl rounded-bl-sm`}>
+                  <div className="flex gap-1.5">
                     <span className={`w-2 h-2 rounded-full animate-bounce ${accentColor}`} style={{ animationDelay: "0ms" }} />
                     <span className={`w-2 h-2 rounded-full animate-bounce ${accentColor}`} style={{ animationDelay: "150ms" }} />
                     <span className={`w-2 h-2 rounded-full animate-bounce ${accentColor}`} style={{ animationDelay: "300ms" }} />
@@ -357,21 +353,21 @@ export default function ChatPage() {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Input */}
-          <div className={`p-6 border-t ${isDark ? 'border-zinc-800' : 'border-gray-200'}`}>
-            <form onSubmit={handleSubmit} className="flex gap-3">
+          {/* Input Area */}
+          <div className={`p-4 sm:p-6 border-t ${isDark ? 'border-zinc-800' : 'border-gray-200'}`}>
+            <form onSubmit={handleSubmit} className="flex gap-3 max-w-4xl mx-auto">
               <input
                 type="text"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Type your message..."
-                className={`flex-1 px-5 py-4 rounded-xl border ${inputBg} ${textColor} placeholder-zinc-500 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-300`}
+                className={`flex-1 px-4 sm:px-5 py-3 sm:py-4 rounded-xl border ${inputBg} ${textColor} placeholder-zinc-500 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-300 text-sm sm:text-base`}
                 style={{ borderColor: isDark ? '#3f3f46' : '#d1d5db' }}
               />
               <button
                 type="submit"
                 disabled={loading || !message.trim()}
-                className="px-6 py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-xl hover:from-green-400 hover:to-emerald-500 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 sm:px-6 py-3 sm:py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-xl hover:from-green-400 hover:to-emerald-500 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
@@ -381,15 +377,20 @@ export default function ChatPage() {
           </div>
         </div>
 
-        {/* Suggested Questions Sidebar */}
+        {/* Suggested Questions Sidebar - Desktop */}
         <div className={`hidden lg:block w-80 border-l p-6 ${isDark ? 'bg-zinc-900/50 border-zinc-800' : 'bg-white/50 border-gray-200'}`}>
-          <h3 className={`text-lg font-semibold mb-4 ${textColor}`}>Suggested Questions</h3>
-          <div className="space-y-2">
+          <h3 className={`text-lg font-semibold mb-4 ${textColor} flex items-center gap-2`}>
+            <svg className={`w-5 h-5 ${accentColor}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Suggested Questions
+          </h3>
+          <div className="space-y-2 overflow-y-auto max-h-[calc(100vh-180px)]">
             {suggestedQuestions.map((q, index) => (
               <button
                 key={index}
-                onClick={() => setMessage(q)}
-                className={`w-full text-left px-4 py-3 rounded-xl text-sm transition-all duration-300 ${isDark ? 'bg-zinc-800/50 hover:bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-700 hover:border-green-500/30' : 'bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-900 border border-gray-200 hover:border-green-500/30'}`}
+                onClick={() => sendMessage(q)}
+                className={`w-full text-left px-4 py-3 rounded-xl text-sm transition-all duration-300 hover:scale-[1.02] ${isDark ? 'bg-zinc-800/50 hover:bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-700 hover:border-green-500/50' : 'bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-900 border border-gray-200 hover:border-green-500/50'}`}
               >
                 {q}
               </button>
@@ -400,13 +401,18 @@ export default function ChatPage() {
 
       {/* Mobile Suggested Questions */}
       <div className={`lg:hidden border-t p-4 ${isDark ? 'bg-zinc-900/50 border-zinc-800' : 'bg-white/50 border-gray-200'}`}>
-        <h3 className={`text-sm font-semibold mb-3 ${secondaryText}`}>Suggested Questions</h3>
-        <div className="flex gap-2 overflow-x-auto pb-2">
-          {suggestedQuestions.slice(0, 8).map((q, index) => (
+        <h3 className={`text-sm font-semibold mb-3 ${secondaryText} flex items-center gap-2`}>
+          <svg className={`w-4 h-4 ${accentColor}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          Suggested Questions
+        </h3>
+        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+          {suggestedQuestions.slice(0, 10).map((q, index) => (
             <button
               key={index}
-              onClick={() => setMessage(q)}
-              className={`flex-shrink-0 px-4 py-2 rounded-full text-sm transition-colors ${isDark ? 'bg-zinc-800 hover:bg-zinc-700 text-zinc-300 border border-zinc-700' : 'bg-gray-200 hover:bg-gray-300 text-gray-700 border border-gray-200'}`}
+              onClick={() => sendMessage(q)}
+              className={`flex-shrink-0 px-4 py-2 rounded-full text-sm transition-all whitespace-nowrap ${isDark ? 'bg-zinc-800 hover:bg-zinc-700 text-zinc-300 border border-zinc-700' : 'bg-gray-200 hover:bg-gray-300 text-gray-700 border border-gray-200'}`}
             >
               {q}
             </button>
@@ -422,6 +428,13 @@ export default function ChatPage() {
         }
         .animate-fadeIn {
           animation: fadeIn 0.3s ease-out;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
         }
       `}</style>
     </div>
