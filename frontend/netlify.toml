@@ -1,0 +1,13 @@
+[build]
+  # The directory where Netlify will run the build command
+  base = "frontend"
+  
+  # The command to build the Next.js site
+  command = "npm run build"
+  
+  # The directory that contains the finished build artifacts
+  publish = ".next"
+
+[[plugins]]
+  # Netlify plugin for Next.js (installed automatically by Netlify)
+  package = "@netlify/plugin-nextjs"
