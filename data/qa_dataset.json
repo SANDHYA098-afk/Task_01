@@ -1,7 +1,7 @@
 [
   {
     "question": "Hi",
-    "answer": "Hello! Welcome to SupportAI. How can I assist you today? I'm here to help you with any questions about our platform."
+    "answer": "Hello! Welcome to NEURO COPILOT. How can I assist you today? I'm here to help you with any questions about our platform."
   },
   {
     "question": "Hello",
@@ -13,7 +13,7 @@
   },
   {
     "question": "What is this platform?",
-    "answer": "SupportAI is an AI-powered support assistant platform that uses RAG (Retrieval-Augmented Generation) technology to provide instant, accurate answers from our documentation. It helps users find information quickly without searching through lengthy manuals."
+    "answer": "NEURO COPILOT is an AI-powered support assistant platform that uses RAG (Retrieval-Augmented Generation) technology to provide instant, accurate answers from our documentation. It helps users find information quickly without searching through lengthy manuals."
   },
   {
     "question": "How does the AI assistant work?",
@@ -29,7 +29,7 @@
   },
   {
     "question": "What features are available?",
-    "answer": "SupportAI offers: 24/7 AI-powered support, instant responses from documentation, semantic search using vector embeddings, chat history, suggested questions, dark/light theme options, mobile-responsive design, and secure user authentication."
+    "answer": "NEURO COPILOT offers: 24/7 AI-powered support, instant responses from documentation, semantic search using vector embeddings, chat history, suggested questions, dark/light theme options, mobile-responsive design, and secure user authentication."
   },
   {
     "question": "How do I reset my password?",
@@ -49,11 +49,11 @@
   },
   {
     "question": "Can I integrate this with my app?",
-    "answer": "Yes! Our API provides RESTful endpoints for chat, login, and signup. You can integrate SupportAI into your applications using our backend API. Check our documentation for API details and integration guides."
+    "answer": "Yes! Our API provides RESTful endpoints for chat, login, and signup. You can integrate NEURO COPILOT into your applications using our backend API. Check our documentation for API details and integration guides."
   },
   {
     "question": "What is LangChain?",
-    "answer": "LangChain is an open-source framework for building applications with large language models. It provides tools for document loading, text splitting, embedding generation, and vector storage, making it easier to build RAG applications like SupportAI."
+    "answer": "LangChain is an open-source framework for building applications with large language models. It provides tools for document loading, text splitting, embedding generation, and vector storage, making it easier to build RAG applications like NEURO COPILOT."
   },
   {
     "question": "How does the chatbot work?",
@@ -65,15 +65,15 @@
   },
   {
     "question": "How do I contact support?",
-    "answer": "You can reach our support team through the Q&A chatbot for instant answers. For more complex issues, please email us at support@supportai.com. We typically respond within 24 hours on business days."
+    "answer": "You can reach our support team through the Q&A chatbot for instant answers. For more complex issues, please email us at support@neurocopilot.com. We typically respond within 24 hours on business days."
   },
   {
     "question": "What are the system requirements?",
-    "answer": "SupportAI runs in any modern web browser. We recommend Chrome, Firefox, Safari, or Edge (latest versions). The platform is fully responsive and works on desktop, tablet, and mobile devices. No software installation required."
+    "answer": "NEURO COPILOT runs in any modern web browser. We recommend Chrome, Firefox, Safari, or Edge (latest versions). The platform is fully responsive and works on desktop, tablet, and mobile devices. No software installation required."
   },
   {
     "question": "Is there a mobile app?",
-    "answer": "Currently, SupportAI is a web-based platform optimized for mobile browsers. The responsive design ensures a seamless experience on smartphones and tablets. A dedicated mobile app may be released in the future."
+    "answer": "Currently, NEURO COPILOT is a web-based platform optimized for mobile browsers. The responsive design ensures a seamless experience on smartphones and tablets. A dedicated mobile app may be released in the future."
   },
   {
     "question": "How do I navigate the platform?",
@@ -117,6 +117,106 @@
   },
   {
     "question": "Is there a free tier?",
-    "answer": "Yes! SupportAI is completely free to use. There are no subscription fees, usage limits, or hidden charges. We believe everyone should have access to quality AI-powered support."
+    "answer": "Yes! NEURO COPILOT is completely free to use. There are no subscription fees, usage limits, or hidden charges. We believe everyone should have access to quality AI-powered support."
+  },
+  {
+    "question": "What is a chatbot?",
+    "answer": "A chatbot is a software application that simulates human conversation through text or voice interactions. Our chatbot uses AI to understand your questions and provide helpful responses from our knowledge base."
+  },
+  {
+    "question": "How do I create an account?",
+    "answer": "Click the 'Sign Up' button on the login page. Enter your name, email, and password. Your account will be created instantly, and you can start using the platform right away."
+  },
+  {
+    "question": "What browsers are supported?",
+    "answer": "NEURO COPILOT works on all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. We recommend keeping your browser updated for the best experience."
+  },
+  {
+    "question": "Is my chat data private?",
+    "answer": "Yes, your chat data is private. Conversations are not stored permanently on our servers. Each session is independent, and we do not share your data with third parties."
+  },
+  {
+    "question": "What is machine learning?",
+    "answer": "Machine learning is a branch of AI where systems learn from data to improve their performance. Our platform uses machine learning models to understand questions and find relevant answers."
+  },
+  {
+    "question": "Can I export my chat history?",
+    "answer": "Currently, chat history is session-based and not stored permanently. We are working on a feature to allow users to export their conversations for their own records."
+  },
+  {
+    "question": "What is natural language processing?",
+    "answer": "Natural Language Processing (NLP) is a field of AI that helps computers understand human language. Our system uses NLP to interpret your questions and generate meaningful responses."
+  },
+  {
+    "question": "How do I report a bug?",
+    "answer": "If you encounter any issues, please email us at support@neurocopilot.com with details about the problem. Include screenshots if possible to help us resolve the issue quickly."
+  },
+  {
+    "question": "What is a knowledge base?",
+    "answer": "A knowledge base is a centralized repository of information. Our AI searches through this repository to find answers to your questions, ensuring accurate and consistent information."
+  },
+  {
+    "question": "Can I customize the interface?",
+    "answer": "You can customize the theme between dark and light modes using the theme toggle in the sidebar. More customization options may be added in future updates."
+  },
+  {
+    "question": "What is an API endpoint?",
+    "answer": "An API endpoint is a specific URL where an API receives requests. Our backend has endpoints like /login, /signup, and /chat that handle different operations."
+  },
+  {
+    "question": "How do I logout?",
+    "answer": "Click the menu icon in the navigation bar, then click the 'Logout' button in the sidebar. This will clear your session and return you to the login page."
+  },
+  {
+    "question": "What is SHA-256?",
+    "answer": "SHA-256 is a cryptographic hash function that generates a unique fixed-size string from input data. We use it to securely hash passwords so they cannot be reversed to the original password."
+  },
+  {
+    "question": "Can I ask multiple questions at once?",
+    "answer": "Yes, you can ask multiple questions in the chat. The AI will process each question and provide individual responses. For best results, ask one question at a time."
+  },
+  {
+    "question": "What is a vector database?",
+    "answer": "A vector database stores data as high-dimensional vectors. FAISS, our vector database, enables fast similarity searches to find content that matches the meaning of your questions."
+  },
+  {
+    "question": "How do I update my profile?",
+    "answer": "Currently, profile updates are handled through account recreation. We are working on a profile management feature that will allow you to update your information directly."
+  },
+  {
+    "question": "What is semantic similarity?",
+    "answer": "Semantic similarity measures how alike two pieces of text are in meaning, not just words. Our system uses this to find answers that match the intent of your question, even with different wording."
+  },
+  {
+    "question": "Is the platform open source?",
+    "answer": "Currently, NEURO COPILOT is not open source. However, we may consider open sourcing parts of the project in the future to contribute to the AI community."
+  },
+  {
+    "question": "What is FastAPI?",
+    "answer": "FastAPI is a modern Python web framework for building APIs. It's fast, easy to use, and automatically generates documentation. We use it to power our backend services."
+  },
+  {
+    "question": "How do I clear my chat?",
+    "answer": "Refresh the page to start a new chat session. This will clear the current conversation and allow you to start fresh with new questions."
+  },
+  {
+    "question": "What are embeddings?",
+    "answer": "Embeddings are numerical representations of text that capture semantic meaning. Similar texts have similar embeddings, allowing our system to find relevant content based on meaning rather than keywords."
+  },
+  {
+    "question": "Can I use this for my business?",
+    "answer": "Yes! NEURO COPILOT can be used for personal or business purposes. The platform is designed to be flexible and can handle various use cases including customer support and internal documentation queries."
+  },
+  {
+    "question": "What is Next.js?",
+    "answer": "Next.js is a React framework for building web applications. It provides features like server-side rendering, static site generation, and API routes. We use it for our frontend development."
+  },
+  {
+    "question": "How do I provide feedback?",
+    "answer": "We welcome your feedback! Please email us at support@neurocopilot.com with your suggestions, feature requests, or any comments about your experience using the platform."
+  },
+  {
+    "question": "What is a similarity threshold?",
+    "answer": "A similarity threshold is a cutoff value that determines how closely content must match a query to be considered relevant. We use this to ensure only accurate, relevant information is provided in responses."
   }
 ]

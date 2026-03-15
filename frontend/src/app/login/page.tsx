@@ -15,10 +15,10 @@ function TypingText({ text, speed = 100, delay = 0 }: { text: string; speed?: nu
 
   useEffect(() => {
     if (!started) return;
-    
+
     let index = 0;
     setDisplayedText("");
-    
+
     const interval = setInterval(() => {
       if (index < text.length) {
         setDisplayedText(text.slice(0, index + 1));
@@ -140,12 +140,11 @@ export default function LoginPage() {
 
       {/* Desktop Layout */}
       <div className="hidden md:flex w-full h-screen relative" ref={containerRef}>
-        
+
         {/* Slant Divider */}
-        <div 
-          className={`absolute top-0 bottom-0 w-[200px] z-20 transition-all duration-700 ease-in-out ${
-            isSignup ? "left-[calc(50%-100px)]" : "left-[calc(50%-100px)]"
-          }`}
+        <div
+          className={`absolute top-0 bottom-0 w-[200px] z-20 transition-all duration-700 ease-in-out ${isSignup ? "left-[calc(50%-100px)]" : "left-[calc(50%-100px)]"
+            }`}
           style={{
             transform: "skewX(-12deg)",
             background: "linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.3), transparent)",
@@ -154,109 +153,88 @@ export default function LoginPage() {
 
         {/* Login View - Message Left, Card Right */}
         <div
-          className={`absolute inset-0 flex transition-all duration-700 ease-in-out ${
-            isSignup 
-              ? "opacity-0 pointer-events-none translate-x-[-20px]" 
-              : "opacity-100 translate-x-0"
-          }`}
+          className={`absolute inset-0 flex transition-all duration-700 ease-in-out ${isSignup
+            ? "opacity-0 pointer-events-none translate-x-[-20px]"
+            : "opacity-100 translate-x-0"
+            }`}
         >
           {/* Left Side - Welcome Message */}
           <div className="w-1/2 flex items-center justify-center relative">
             <div className="text-center px-12 z-10">
-              <div className="mb-[15px]">
-                <span className="inline-block px-4 py-2 rounded-full bg-green-500/20 border border-green-500/30 text-green-400 text-sm font-medium">
-                  ✨ AI-Powered Support
-                </span>
-              </div>
-              <h1 className="text-5xl font-bold text-white mb-[15px]">
-                <TypingText text="Welcome Back" speed={80} delay={300} />
+              <div className="mb-[155px]">
+                <h1 className="text-5xl font-bold text-white mb-[15px]">
+                <TypingText text="Welcome Back To" speed={80} delay={300} />
               </h1>
-              <p className="text-xl text-zinc-400 max-w-md mx-auto leading-relaxed">
+                <div className="inline-block px-4 py-2  text-green-400 text-[60px] font-bold font-mono animate-rainbow bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent">
+                  NEURO COPILOT 
+                </div>
+              </div>
+              <p className="text-xl text-zinc-400 max-w-md mx-auto mt-4 leading-relaxed text-[20px] font-mono">
                 Sign in to continue to your AI Support Assistant and get instant answers to your questions.
               </p>
-              <div className="mt-[15px] flex items-center justify-center gap-[15px]">
-                <div className="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center">
-                  <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                </div>
-                <div className="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center">
-                  <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.959 11.959 0 013.5 6.002a11.959 11.959 0 012.118 8.016M12 12h.01" />
-                  </svg>
-                </div>
-                <div className="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center">
-                  <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                  </svg>
-                </div>
+              <div className="pt-5 flex items-center justify-center gap-[15px]">
+                
               </div>
             </div>
           </div>
 
           {/* Right Side - Login Card */}
-          <div className="w-1/2 flex items-center justify-center bg-zinc-950/50 relative">
-            <div 
-              className={`w-full max-w-md px-8 transition-all duration-500 ${
-                mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-              }`}
+          <div className="w-1/2 h-full flex items-center justify-center bg-zinc-950/50 relative">
+            <div
+              className={`w-full max-w-md px-8 transition-all duration-500 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+                }`}
             >
               {/* Glass morphism card */}
-              <div 
-                className="rounded-3xl p-10 shadow-2xl border transition-colors duration-300"
-                style={{
-                  background: "rgba(24, 24, 27, 0.6)",
-                  backdropFilter: "blur(20px)",
-                  WebkitBackdropFilter: "blur(20px)",
-                  borderColor: "rgba(34, 197, 94, 0.2)",
-                  boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.37), 0 0 20px rgba(34, 197, 94, 0.1)",
-                }}
+              <div
+                className="glass p-8 h-[500px] w-[400px] shadow-2xl border-2 border-white/60 animate-card"
               >
-                <div className="text-center mb-[15px]">
-                  <h2 className="text-3xl font-bold text-white mb-[10px]">Login</h2>
-                  <p className="text-zinc-500">Enter your credentials to continue</p>
+                <div className="text-center mb-6">
+                  <br />
+                  <h2 className="text-3xl font-bold text-white mb-2 font-mono p-4 mt-4">Login</h2>
+                  <p className="p-4"> </p>
+                  <p className="text-zinc-500 p-4">Enter your credentials to continue</p>
+                  <br />
                 </div>
 
                 {error && (
-                  <div className="mb-[15px] p-[15px] bg-red-500/10 border border-red-500/30 rounded-xl text-red-400 text-sm">
+                  <div className="mb-6 p-4 space-y-4 bg-red-500/10 border border-red-500/30 rounded-xl text-red-400 text-sm">
                     {error}
                   </div>
                 )}
 
-                <form onSubmit={handleLogin} className="space-y-4">
+                <form onSubmit={handleLogin} className="space-y-4 px-4">
                   <div>
-                    <label className="block text-sm font-medium text-zinc-400 mb-2">
+                    <label className="block text-center text-sm text-[20px] font-medium text-zinc-400 mb-2 font-mono">
                       Email Address
                     </label>
                     <input
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full px-4 py-3.5 rounded-xl border border-zinc-700 bg-zinc-800/50 text-white placeholder-zinc-500 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-300"
+                      className="px-4 py-3.5 my-[10px]  border border-zinc bg-zinc text-white placeholder-zinc-500 outline-none transition-all duration-300"
                       placeholder="Enter your email"
                       required
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-zinc-400 mb-2">
+                    <label className="block text-center text-sm font-medium text-zinc-400 mb-2 text-[20px] font-mono">
                       Password
                     </label>
                     <input
                       type="password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="w-full px-4 py-3.5 rounded-xl border border-zinc-700 bg-zinc-800/50 text-white placeholder-zinc-500 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-300"
+                      className="px-4 py-3.5 my-[10px]  border border-zinc bg-zinc text-white placeholder-zinc-500 outline-none transition-all duration-300"
                       placeholder="Enter your password"
                       required
                     />
                   </div>
-
-                  <div className="pt-2">
+                  <div className="flex justify-center font-mono text-[25px]">
                     <button
                       type="submit"
                       disabled={loading}
-                      className="w-full py-3.5 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-xl hover:from-green-400 hover:to-emerald-500 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-green-500/25 hover:shadow-green-500/40"
+                      className="login-btn text-center"
                     >
                       {loading ? (
                         <span className="flex items-center justify-center gap-2">
@@ -273,16 +251,19 @@ export default function LoginPage() {
                   </div>
                 </form>
 
-                <div className="mt-[15px] text-center">
-                  <p className="text-zinc-500">
+                <div className="mt-6 text-center">
+                  <br />
+                  <p className="text-zinc-500 text-[20px]">
                     Don&apos;t have an account?{" "}
                     <button
                       onClick={switchToSignup}
-                      className="text-green-400 font-semibold hover:text-green-300 transition-colors"
+                      className="text-green-400 font-mono text-[20px] font-semibold hover:text-green-300 transition-colors"
                     >
-                      Signup
+                      Signup 
                     </button>
-                  </p>
+                    <br />
+                     </p>
+              
                 </div>
               </div>
             </div>
@@ -291,44 +272,37 @@ export default function LoginPage() {
 
         {/* Signup View - Card Left, Message Right */}
         <div
-          className={`absolute inset-0 flex transition-all duration-700 ease-in-out ${
-            isSignup 
-              ? "opacity-100 translate-x-0" 
-              : "opacity-0 pointer-events-none translate-x-[20px]"
-          }`}
+          className={`absolute inset-0 flex transition-all duration-700 ease-in-out ${isSignup
+            ? "opacity-100 translate-x-0"
+            : "opacity-0 pointer-events-none translate-x-[20px]"
+            }`}
         >
           {/* Left Side - Signup Card */}
           <div className="w-1/2 flex items-center justify-center bg-zinc-950/50 relative">
-            <div 
-              className={`w-full max-w-md px-8 transition-all duration-500 ${
-                mounted && isSignup ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-              }`}
+            <div
+              className={`w-full max-w-md px-8 transition-all duration-500 ${mounted && isSignup ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+                }`}
             >
               {/* Glass morphism card */}
-              <div 
-                className="rounded-3xl p-10 shadow-2xl border transition-colors duration-300"
-                style={{
-                  background: "rgba(24, 24, 27, 0.6)",
-                  backdropFilter: "blur(20px)",
-                  WebkitBackdropFilter: "blur(20px)",
-                  borderColor: "rgba(34, 197, 94, 0.2)",
-                  boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.37), 0 0 20px rgba(34, 197, 94, 0.1)",
-                }}
+              <div
+                className="glass p-8 h-[500px] w-[400px] shadow-2xl border border-white/10 animate-card"
               >
-                <div className="text-center mb-[15px]">
-                  <h2 className="text-3xl font-bold text-white mb-[10px]">Create Account</h2>
+                <div className="text-center mb-6">
+                  <br />
+                  <h2 className="text-3xl font-bold text-white mb-2 font-mono">Create Account</h2>
                   <p className="text-zinc-500">Join us and get started today</p>
+                  <br />
                 </div>
 
                 {error && (
-                  <div className="mb-[15px] p-[15px] bg-red-500/10 border border-red-500/30 rounded-xl text-red-400 text-sm">
+                  <div className="mb-6 p-4 bg-red-500/10 border border-red-500/30 rounded-xl text-red-400 text-sm">
                     {error}
                   </div>
                 )}
 
                 <form onSubmit={handleSignup} className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-zinc-400 mb-2">
+                    <label className="block text-center text-sm font-medium text-zinc-400 mb-2 text-[20px] font-mono">
                       Full Name
                     </label>
                     <input
@@ -342,7 +316,7 @@ export default function LoginPage() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-zinc-400 mb-2">
+                    <label className="block text-center text-sm font-medium text-zinc-400 mb-2 text-[20px] font-mono">
                       Email Address
                     </label>
                     <input
@@ -356,7 +330,7 @@ export default function LoginPage() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-zinc-400 mb-2">
+                    <label className="block text-center text-sm font-medium text-zinc-400 mb-2 text-[20px] font-mono">
                       Password
                     </label>
                     <input
@@ -369,11 +343,11 @@ export default function LoginPage() {
                     />
                   </div>
 
-                  <div className="pt-2">
+                  <div className="pt-2 flex justify-center font-mono text-[25px]">
                     <button
                       type="submit"
                       disabled={loading}
-                      className="w-full py-3.5 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-xl hover:from-green-400 hover:to-emerald-500 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-green-500/25 hover:shadow-green-500/40"
+                      className="login-btn"
                     >
                       {loading ? (
                         <span className="flex items-center justify-center gap-2">
@@ -390,12 +364,12 @@ export default function LoginPage() {
                   </div>
                 </form>
 
-                <div className="mt-[15px] text-center">
-                  <p className="text-zinc-500">
+                <div className="mt-6 text-center">
+                  <p className="text-zinc-500 text-[20px]">
                     Already have an account?{" "}
                     <button
                       onClick={switchToLogin}
-                      className="text-green-400 font-semibold hover:text-green-300 transition-colors"
+                      className="text-green-400 text-[20px] font-semibold hover:text-green-300 transition-colors"
                     >
                       Login
                     </button>
@@ -408,18 +382,25 @@ export default function LoginPage() {
           {/* Right Side - Signup Message */}
           <div className="w-1/2 flex items-center justify-center relative">
             <div className="text-center px-12 z-10">
+              <h1 className="text-5xl font-bold text-white mb-[15px]">
+                <TypingText key={isSignup ? "signup" : "login"} text="Join Us Today" speed={80} delay={300} />
+              </h1>
+
+              <br />
               <div className="mb-[15px]">
-                <span className="inline-block px-4 py-2 rounded-full bg-green-500/20 border border-green-500/30 text-green-400 text-sm font-medium">
+                <span className="inline-block w-[220px] h-[25px] px-4 py-2 rounded-full font-mono bg-green-500/20 border border-green-500/30 text-green-400 text-[15px] font-medium">
                   🚀 Get Started Free
                 </span>
               </div>
-              <h1 className="text-5xl font-bold text-white mb-[15px]">
-                <TypingText text="Join Us Today" speed={80} delay={300} />
-              </h1>
-              <p className="text-xl text-zinc-400 max-w-md mx-auto leading-relaxed">
+              <br />
+    
+              <p className="text-xl text-zinc-400 font-mono text-[20px] max-w-md mx-auto leading-relaxed">
                 Create an account to unlock the power of AI-driven support and get instant answers.
               </p>
-              <div className="mt-[15px] grid grid-cols-3 gap-[15px] max-w-sm mx-auto">
+              
+              <br />
+              
+              <div className="mt-[15px] grid grid-cols-3 gap-[20px] max-w-sm mx-auto">
                 <div className="bg-zinc-800/50 rounded-xl p-4 border border-zinc-700">
                   <div className="text-2xl font-bold text-green-400">24/7</div>
                   <div className="text-xs text-zinc-500">Support</div>
@@ -432,6 +413,7 @@ export default function LoginPage() {
                   <div className="text-2xl font-bold text-green-400">Free</div>
                   <div className="text-xs text-zinc-500">Forever</div>
                 </div>
+               
               </div>
             </div>
           </div>
@@ -446,16 +428,19 @@ export default function LoginPage() {
         </div>
 
         {/* Message at Top */}
-        <div className="relative py-16 px-6">
+        <div className="relative py-12 px-6">
           <div className="text-center">
-            <div className="mb-[15px]">
+            <div className="mb-4">
               <span className="inline-block px-4 py-2 rounded-full bg-green-500/20 border border-green-500/30 text-green-400 text-sm font-medium">
-                ✨ AI-Powered Support
+                
               </span>
             </div>
-            <h1 className="text-3xl font-bold text-white mb-[10px]">
-              <TypingText text={isSignup ? "Join Us Today" : "Welcome Back"} speed={60} delay={200} />
+            <h1 className="text-3xl font-bold text-white mb-3">
+              <TypingText text={isSignup ? "Join Us Today" : "Welcome Back To"} speed={60} delay={200} />
             </h1>
+            <div className="inline-block px-3 py-1 text-green-400 text-[32px] font-bold font-mono bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent mb-3">
+              NEURO COPILOT
+            </div>
             <p className="text-zinc-400">
               {isSignup
                 ? "Create an account to get started"
@@ -466,127 +451,114 @@ export default function LoginPage() {
 
         {/* Login/Signup Card Below */}
         <div className="px-6 pb-8 relative">
-          <div 
-            className={`rounded-3xl p-8 shadow-2xl border transition-all duration-500 ${
-              mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
-            style={{
-              background: "rgba(24, 24, 27, 0.6)",
-              backdropFilter: "blur(20px)",
-              WebkitBackdropFilter: "blur(20px)",
-              borderColor: "rgba(34, 197, 94, 0.2)",
-              boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.37), 0 0 20px rgba(34, 197, 94, 0.1)",
-            }}
+          <div
+            className="glass p-6 shadow-2xl border border-white/10 animate-card"
           >
-            <div className="text-center mb-[15px]">
+            <div className="text-center mb-6">
               <h2 className="text-2xl font-bold text-white">
                 {isSignup ? "Create Account" : "Login"}
               </h2>
             </div>
 
             {error && (
-              <div className="mb-[15px] p-[15px] bg-red-500/10 border border-red-500/30 rounded-xl text-red-400 text-sm">
+              <div className="mb-6 p-4 bg-red-500/10 border border-red-500/30 rounded-xl text-red-400 text-sm">
                 {error}
               </div>
             )}
 
             {isSignup ? (
-              <form onSubmit={handleSignup} className="space-y-4">
+              <form onSubmit={handleSignup} className="space-y-5">
                 <div>
-                  <label className="block text-sm font-medium text-zinc-400 mb-2">
+                  <label className="block text-sm font-medium text-zinc-400 mb-3">
                     Full Name
                   </label>
                   <input
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full px-4 py-3.5 rounded-xl border border-zinc-700 bg-zinc-800/50 text-white placeholder-zinc-500 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-300"
+                    className="w-full px-5 py-3 focus:ring-2 focus:ring-green-500 transition-all duration-300"
                     placeholder="Enter your name"
                     required
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-zinc-400 mb-2">
+                  <label className="block text-sm font-medium text-zinc-400 mb-3">
                     Email Address
                   </label>
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-4 py-3.5 rounded-xl border border-zinc-700 bg-zinc-800/50 text-white placeholder-zinc-500 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-300"
+                    className="w-full px-5 py-3 focus:ring-2 focus:ring-green-500 transition-all duration-300"
                     placeholder="Enter your email"
                     required
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-zinc-400 mb-2">
+                  <label className="block text-sm font-medium text-zinc-400 mb-3">
                     Password
                   </label>
                   <input
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full px-4 py-3.5 rounded-xl border border-zinc-700 bg-zinc-800/50 text-white placeholder-zinc-500 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-300"
+                    className="w-full px-5 py-3 focus:ring-2 focus:ring-green-500 transition-all duration-300"
                     placeholder="Create a password"
                     required
                   />
                 </div>
 
-                <div className="pt-2">
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="w-full py-3.5 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-xl hover:from-green-400 hover:to-emerald-500 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-green-500/25"
-                  >
-                    {loading ? "Creating account..." : "Create Account"}
-                  </button>
-                </div>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-xl hover:from-green-400 hover:to-emerald-500 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-green-500/25"
+                >
+                  {loading ? "Creating account..." : "Create Account"}
+                </button>
               </form>
             ) : (
-              <form onSubmit={handleLogin} className="space-y-4">
+              <form onSubmit={handleLogin} className="space-y-5">
                 <div>
-                  <label className="block text-sm font-medium text-zinc-400 mb-2">
+                  <label className="block text-sm font-medium text-zinc-400 mb-3">
                     Email Address
                   </label>
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-4 py-3.5 rounded-xl border border-zinc-700 bg-zinc-800/50 text-white placeholder-zinc-500 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-300"
+                    className="w-full px-5 py-3 focus:ring-2 focus:ring-green-500 transition-all duration-300"
                     placeholder="Enter your email"
                     required
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-zinc-400 mb-2">
+                  <label className="block text-sm font-medium text-zinc-400 mb-3">
                     Password
                   </label>
                   <input
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full px-4 py-3.5 rounded-xl border border-zinc-700 bg-zinc-800/50 text-white placeholder-zinc-500 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-300"
+                    className="w-full px-5 py-3 focus:ring-2 focus:ring-green-500 transition-all duration-300"
                     placeholder="Enter your password"
                     required
                   />
                 </div>
 
-                <div className="pt-2">
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="w-full py-3.5 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-xl hover:from-green-400 hover:to-emerald-500 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-green-500/25"
-                  >
-                    {loading ? "Signing in..." : "Login"}
-                  </button>
-                </div>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-xl hover:from-green-400 hover:to-emerald-500 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-green-500/25"
+                >
+                  {loading ? "Signing in..." : "Login"}
+                </button>
               </form>
             )}
 
-            <div className="mt-[15px] text-center">
+            <div className="mt-6 text-center">
               <p className="text-zinc-500">
                 {isSignup ? "Already have an account?" : "Don't have an account?"}{" "}
                 <button

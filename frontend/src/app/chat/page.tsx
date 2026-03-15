@@ -88,7 +88,12 @@ export default function ChatPage() {
         "What is FAISS?",
         "How do I contact support?",
         "What are the system requirements?",
-        "Is there a free tier?"
+        "Is there a free tier?",
+        "What is a chatbot?",
+        "How do I create an account?",
+        "What browsers are supported?",
+        "Is my chat data private?",
+        "What is machine learning?"
       ]);
     }
   };
@@ -143,73 +148,61 @@ export default function ChatPage() {
 
   if (!user) {
     return (
-      <div className={`min-h-screen flex items-center justify-center ${isDark ? 'bg-black' : 'bg-gray-50'}`}>
-        <div className={`${isDark ? 'text-green-400' : 'text-green-600'} animate-pulse`}>Loading...</div>
+      <div className="chat-loading" style={{ background: isDark ? '#000000' : '#f9fafb' }}>
+        <div style={{ color: isDark ? '#4ade80' : '#16a34a' }} className="chat-loading-text">Loading...</div>
       </div>
     );
   }
 
-  const bgColor = isDark ? 'bg-black' : 'bg-gray-50';
-  const textColor = isDark ? 'text-white' : 'text-gray-900';
   const cardBg = isDark ? 'rgba(24, 24, 27, 0.6)' : 'rgba(255, 255, 255, 0.8)';
   const borderColor = isDark ? 'rgba(34, 197, 94, 0.2)' : 'rgba(34, 197, 94, 0.3)';
   const accentColor = isDark ? 'text-green-400' : 'text-green-600';
   const secondaryText = isDark ? 'text-zinc-400' : 'text-gray-600';
+  const textColor = isDark ? 'text-white' : 'text-gray-900';
   const inputBg = isDark ? 'bg-zinc-800/50' : 'bg-white';
 
   return (
-    <div className={`min-h-screen ${bgColor} ${textColor} flex flex-col transition-colors duration-300`}>
+    <div className="chat-page" style={{ background: isDark ? '#000000' : '#f9fafb', color: isDark ? '#ffffff' : '#111827' }}>
       {/* Animated background */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className={`absolute -top-1/2 -left-1/2 w-full h-full rounded-full blur-3xl ${isDark ? 'bg-gradient-to-br from-green-500/5' : 'bg-gradient-to-br from-green-500/10'}`} />
-        <div className={`absolute -bottom-1/2 -right-1/2 w-full h-full rounded-full blur-3xl ${isDark ? 'bg-gradient-to-tl from-emerald-500/5' : 'bg-gradient-to-tl from-emerald-500/10'}`} />
+      <div className="chat-page-bg">
+        <div className="chat-bg-gradient-top" style={{ background: isDark ? 'linear-gradient(to bottom right, rgba(34, 197, 94, 0.05))' : 'linear-gradient(to bottom right, rgba(34, 197, 94, 0.1))' }} />
+        <div className="chat-bg-gradient-bottom" style={{ background: isDark ? 'linear-gradient(to top left, rgba(16, 185, 129, 0.05))' : 'linear-gradient(to top left, rgba(16, 185, 129, 0.1))' }} />
       </div>
 
       {/* Navbar */}
       <nav 
-        className="fixed top-0 left-0 right-0 z-50 border-b"
+        className="home-navbar"
         style={{
           background: isDark ? "rgba(9, 9, 11, 0.95)" : "rgba(255, 255, 255, 0.95)",
-          backdropFilter: "blur(20px)",
-          WebkitBackdropFilter: "blur(20px)",
           borderColor: borderColor,
         }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
+        <div className="navbar-container">
           {/* Menu Icon */}
           <button 
             onClick={() => setMenuOpen(!menuOpen)}
-            className={`p-2 rounded-lg transition-colors ${isDark ? 'hover:bg-zinc-800' : 'hover:bg-gray-100'}`}
+            className="navbar-menu-btn"
+            style={{ color: isDark ? '#e4e4e7' : '#18181b' }}
           >
-            <svg className={`w-6 h-6 ${textColor}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
 
           {/* Logo */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg shadow-green-500/20">
-              <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="navbar-logo">
+            <div className="navbar-logo-icon">
+              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             </div>
-            <span className={`text-lg sm:text-xl font-bold ${textColor}`}>SupportAI</span>
+            <span className="navbar-logo-text">NEURO COPILOT</span>
           </div>
 
-          {/* Navigation */}
-          <div className="flex items-center gap-2 sm:gap-4">
-            <button
-              onClick={() => router.push("/home")}
-              className={`px-3 sm:px-4 py-2 rounded-xl transition-colors text-sm font-medium ${isDark ? 'bg-zinc-800 hover:bg-zinc-700 text-zinc-300' : 'bg-gray-200 hover:bg-gray-300 text-gray-700'}`}
-            >
-              Home
-            </button>
-            <button
-              onClick={handleLogout}
-              className={`px-3 sm:px-4 py-2 rounded-xl transition-colors text-sm font-medium ${isDark ? 'bg-zinc-800 hover:bg-zinc-700 text-zinc-300' : 'bg-gray-200 hover:bg-gray-300 text-gray-700'}`}
-            >
-              Logout
-            </button>
+          {/* Navigation Links */}
+          <div className="navbar-links">
+            <button onClick={() => router.push("/home")} className="navbar-link" style={{ color: isDark ? '#a1a1aa' : '#71717a' }}>Home</button>
+            <button onClick={handleLogout} className="navbar-link" style={{ color: isDark ? '#a1a1aa' : '#71717a' }}>Logout</button>
           </div>
         </div>
       </nav>
@@ -225,50 +218,54 @@ export default function ChatPage() {
             className={`fixed top-0 left-0 h-full w-72 z-50 p-6 ${isDark ? 'bg-zinc-900' : 'bg-white'} border-r`}
             style={{ borderColor: borderColor }}
           >
-            <div className="flex items-center justify-between mb-8">
-              <span className={`text-xl font-bold ${textColor}`}>Menu</span>
+            <div className="menu-drawer-header">
+              <span className="menu-drawer-title" style={{ color: isDark ? '#fafafa' : '#18181b' }}>Menu</span>
               <button 
                 onClick={() => setMenuOpen(false)}
-                className={`p-2 rounded-lg ${isDark ? 'hover:bg-zinc-800' : 'hover:bg-gray-100'}`}
+                className="menu-drawer-close"
+                style={{ color: isDark ? '#e4e4e7' : '#18181b' }}
               >
-                <svg className={`w-5 h-5 ${textColor}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
             </div>
 
-            <div className="space-y-4">
+            <div className="menu-drawer-items">
               <button 
                 onClick={() => { setMenuOpen(false); router.push("/home"); }}
-                className={`w-full text-left px-4 py-3 rounded-xl transition-colors ${isDark ? 'hover:bg-zinc-800' : 'hover:bg-gray-100'}`}
+                className="menu-drawer-item"
+                style={{ color: isDark ? '#fafafa' : '#18181b' }}
               >
-                <span className={textColor}>About Us</span>
+                About Us
               </button>
               <button 
                 onClick={() => { setMenuOpen(false); }}
-                className={`w-full text-left px-4 py-3 rounded-xl transition-colors ${isDark ? 'hover:bg-zinc-800' : 'hover:bg-gray-100'}`}
+                className="menu-drawer-item"
+                style={{ color: isDark ? '#fafafa' : '#18181b' }}
               >
-                <span className={textColor}>Q&A</span>
+                Q&A
               </button>
               
               {/* Theme Toggle */}
               <button 
                 onClick={toggleTheme}
-                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl transition-colors ${isDark ? 'hover:bg-zinc-800' : 'hover:bg-gray-100'}`}
+                className="menu-drawer-item"
+                style={{ color: isDark ? '#fafafa' : '#18181b' }}
               >
-                <span className={textColor}>Theme</span>
-                <div className="flex items-center gap-2">
+                <span>Theme</span>
+                <div className="menu-drawer-theme-icon">
                   {isDark ? (
                     <>
-                      <span className="text-xs text-zinc-500">Dark</span>
-                      <svg className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+                      <span style={{ fontSize: '12px', color: '#71717a' }}>Dark</span>
+                      <svg width="20" height="20" fill="currentColor" style={{ color: '#facc15' }} viewBox="0 0 24 24">
                         <path d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
                       </svg>
                     </>
                   ) : (
                     <>
-                      <span className="text-xs text-gray-500">Light</span>
-                      <svg className="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                      <span style={{ fontSize: '12px', color: '#71717a' }}>Light</span>
+                      <svg width="20" height="20" fill="currentColor" style={{ color: '#eab308' }} viewBox="0 0 24 24">
                         <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z" />
                       </svg>
                     </>
@@ -278,20 +275,20 @@ export default function ChatPage() {
             </div>
 
             {/* User Profile at Bottom */}
-            <div className="absolute bottom-6 left-6 right-6">
+            <div className="menu-drawer-profile">
               <div 
-                className="flex items-center gap-3 p-4 rounded-xl"
+                className="menu-drawer-profile-card"
                 style={{
                   background: cardBg,
                   border: `1px solid ${borderColor}`,
                 }}
               >
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center">
-                  <span className="text-white font-semibold">{user.name.charAt(0).toUpperCase()}</span>
+                <div className="menu-drawer-profile-avatar">
+                  <span>{user.name.charAt(0).toUpperCase()}</span>
                 </div>
                 <div>
-                  <div className={`font-medium ${textColor}`}>{user.name}</div>
-                  <div className={`text-xs ${secondaryText}`}>{user.email}</div>
+                  <div className="menu-drawer-profile-name" style={{ color: isDark ? '#fafafa' : '#18181b' }}>{user.name}</div>
+                  <div className="menu-drawer-profile-email" style={{ color: isDark ? '#a1a1aa' : '#71717a' }}>{user.email}</div>
                 </div>
               </div>
             </div>
@@ -300,11 +297,22 @@ export default function ChatPage() {
       )}
 
       {/* Main Chat Container */}
-      <div className="flex-1 pt-16 sm:pt-20 flex relative">
-        {/* Chat Area */}
-        <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex relative" style={{ marginTop: "100px" }}>
+        {/* Chat Area - Separate div with its own margin/padding */}
+        <div 
+          className="flex-1 flex flex-col min-w-0"
+          style={{
+            marginLeft: "20px",
+            marginRight: "20px",
+            marginBottom: "20px",
+            padding: "20px"
+          }}
+        >
           {/* Messages Container */}
-          <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-4 space-y-4">
+          <div 
+            className="flex-1 overflow-y-auto space-y-4"
+            style={{ height: '30px' }}
+          >
             {messages.length === 0 && (
               <div className={`text-center mt-12 sm:mt-20 ${secondaryText}`}>
                 <div className={`w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-6 rounded-full flex items-center justify-center ${isDark ? 'bg-green-500/10' : 'bg-green-100'}`}>
@@ -328,6 +336,11 @@ export default function ChatPage() {
                       ? "bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-2xl rounded-br-sm"
                       : `${isDark ? 'bg-zinc-800' : 'bg-gray-200'} ${textColor} rounded-2xl rounded-bl-sm`
                   }`}
+                  style={{
+                    padding: '3px',
+                    fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+                    fontSize: '15px'
+                  }}
                 >
                   {msg.type === "ai" ? (
                     <TypingResponse text={msg.text} speed={15} />
@@ -361,24 +374,44 @@ export default function ChatPage() {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Type your message..."
-                className={`flex-1 px-4 sm:px-5 py-3 sm:py-4 rounded-xl border ${inputBg} ${textColor} placeholder-zinc-500 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-300 text-sm sm:text-base`}
-                style={{ borderColor: isDark ? '#3f3f46' : '#d1d5db' }}
+                className={`chat-input flex-1 px-4 sm:px-5 py-3 sm:py-4 rounded-xl border ${inputBg} ${textColor} placeholder-zinc-500 text-sm sm:text-base`}
               />
               <button
                 type="submit"
                 disabled={loading || !message.trim()}
-                className="px-4 sm:px-6 py-3 sm:py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-xl hover:from-green-400 hover:to-emerald-500 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                className="chat-send-btn sm:px-6 py-3 sm:py-4 items-center justify-center cursor-pointer-enabled"
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                </svg>
+                <svg
+  className="chat-send-icon w-5 h-5"
+  fill="none"
+  stroke="currentColor"
+  viewBox="0 0 24 24"
+>
+  <path
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth={2}
+    d="M5 12h14M13 6l6 6-6 6"
+  />
+</svg>
               </button>
             </form>
           </div>
         </div>
 
-        {/* Suggested Questions Sidebar - Desktop */}
-        <div className={`hidden lg:block w-80 border-l p-6 ${isDark ? 'bg-zinc-900/50 border-zinc-800' : 'bg-white/50 border-gray-200'}`}>
+        {/* Suggested Questions Sidebar - Desktop - Separate div with its own margin/padding */}
+        <div 
+          className="hidden lg:block w-80 border-l"
+          style={{
+            marginTop: "0.5px",
+            marginRight: "20px",
+            marginBottom: "5px",
+            padding: "24px",
+            background: isDark ? 'rgba(24, 24, 27, 0.5)' : 'rgba(255, 255, 255, 0.5)',
+            borderColor: isDark ? '#27272a' : '#e5e7eb',
+            fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace'
+          }}
+        >
           <h3 className={`text-lg font-semibold mb-4 ${textColor} flex items-center gap-2`}>
             <svg className={`w-5 h-5 ${accentColor}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -390,7 +423,13 @@ export default function ChatPage() {
               <button
                 key={index}
                 onClick={() => sendMessage(q)}
-                className={`w-full text-left px-4 py-3 rounded-xl text-sm transition-all duration-300 hover:scale-[1.02] ${isDark ? 'bg-zinc-800/50 hover:bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-700 hover:border-green-500/50' : 'bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-900 border border-gray-200 hover:border-green-500/50'}`}
+                className={`w-full text-left rounded-xl text-sm transition-all duration-300 hover:scale-[1.02] ${isDark ? 'bg-zinc-800/50 hover:bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-700 hover:border-green-500/50' : 'bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-900 border border-gray-200 hover:border-green-500/50'}`}
+                style={{
+                  minHeight: '30px',
+                  height: 'auto',
+                  fontSize: '15px',
+                  padding: '8px 16px'
+                }}
               >
                 {q}
               </button>

@@ -109,7 +109,7 @@ class RAGPipeline:
         
         return answer, similarity
     
-    def get_suggested_questions(self, n: int = 15) -> List[str]:
+    def get_suggested_questions(self, n: int = 20) -> List[str]:
         """
         Get a list of suggested questions from the dataset.
         
@@ -119,8 +119,11 @@ class RAGPipeline:
         Returns:
             List of question strings
         """
-        questions = [item['question'] for item in self.qa_pairs[:n]]
-        return questions
+        # Filter out greeting questions
+        greetings = {'hi', 'hello', 'hey'}
+        questions = [item['question'] for item in self.qa_pairs 
+                     if item['question'].lower().strip() not in greetings]
+        return questions[:n]
 
 
 # Global RAG pipeline instance

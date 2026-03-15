@@ -67,7 +67,7 @@ async def chat(request: ChatRequest):
         )
 
 @app.get("/suggestions")
-async def get_suggestions(n: int = 15):
+async def get_suggestions(n: int = 20):
     """Get suggested questions"""
     try:
         rag = get_rag_pipeline()
