@@ -1,299 +1,112 @@
-# NEURO COPILOT - Complete Project Explanation
+# ⚡ NEURO COPILOT — AI Support Assistant
 
-This is a **RAG-powered AI chat application** built for the NeuroStack Generative AI Internship Hackathon. Let me explain each file and its purpose:
+**NEURO COPILOT** is a high-performance, RAG-driven AI Support Copilot designed to provide instant, contextually relevant answers using private knowledge bases. It features a stunning **Glassmorphism UI**, real-time **Confidence Scoring**, and a technical monospace aesthetic inspired by high-end developer tools.
 
 ---
 
-## 🏗️ **Project Structure Overview**
+## 🎨 Visual Identity
+- **Glassmorphism**: Leverages `backdrop-filter: blur(20px)` and semi-transparent layers for a premium, futuristic look.
+- **Neon Green Theme**: Built around a vibrant `#22c55e` green gradient accent system.
+- **Typography**: Uses `Geist Mono` for a precise, engineering-focused feel across all interfaces.
+- **Interactive States**: Pulse glows, floating animations, and typing-cursor effects for bot responses.
 
-```
+## 🧠 Core Features
+
+### 1. Advanced RAG Pipeline
+- **Engine**: Powered by **LangChain** and **FAISS**.
+- **Embeddings**: Uses `all-MiniLM-L6-v2` (HuggingFace) for 384-dimensional semantic understanding.
+- **Accuracy**: Employs a cosine similarity-based confidence metric `1 - (L2² / 2)` to ensure exact knowledge-base matches score near 100%.
+
+### 2. High-Performance Chat Interface
+- **Suggested Questions**: A curated list of questions fetched directly from the RAG dataset, providing a 100% confidence match.
+- **Confidence Badges**: Real-time reliability scoring displayed for every bot response (rounded to 1 decimal place).
+- **Typing Animation**: Bots deliver responses character-by-character to simulate interactive communication.
+- **Scrollable Sidebar**: A fixed-height, scrollable suggestions panel for easy navigation of common queries.
+
+### 3. Integrated Authentication
+- **Dual Mode Form**: Seamless, animated transition between Login and Signup.
+- **Session Persistence**: Automatic redirection to Chat after login, with user data stored in LocalStorage.
+- **Theme Toggle**: Persistence-based Dark/Light mode switcher available globally.
+
+---
+
+## 📂 Architecture Overview
+
+```text
 Task_01/
-├── backend/          # FastAPI backend
-├── frontend/         # Next.js frontend
-├── data/            # Q&A dataset
-└── rag/             # RAG pipeline configuration
+├── backend/            # FastAPI + LangChain Implementation
+│   ├── main.py         # Entry point & API routes (/chat, /suggestions, /auth)
+│   ├── rag_pipeline.py # FAISS Vector Database & Similarity Logic
+│   ├── auth.py         # JWT-compatible auth logic
+│   └── models.py       # Pydantic Schemas
+├── data/               # Knowledge Base
+│   └── qa_dataset.json # Source of truth for AI responses
+├── frontend/           # Next.js 16 + Tailwind CSS v4
+│   ├── app/            # App Router (Chat, Login)
+│   └── globals.css     # Design tokens & Custom Animations
+└── README.md           # Documentation
 ```
 
 ---
 
-## 📁 **BACKEND FILES** (`backend/`)
+## 🛠️ How it Works: Project Explanation
 
-### 1. **`main.py`** - FastAPI Application Server
-**Purpose:** Main backend server that handles all API requests
+### 1. The RAG Pipeline (The "Brain")
+When you ask a question, NEURO COPILOT doesn't just guess. It uses a **Retrieval-Augmented Generation (RAG)** approach:
+- **Embedding**: Your question is converted into a 384-dimensional vector using the `all-MiniLM-L6-v2` transformer model. This captures the *meaning* of your words, not just the keywords.
+- **Search**: This vector is compared against a pre-indexed **FAISS** (Facebook AI Similarity Search) database of our knowledge base (`qa_dataset.json`).
+- **Retrieval**: The system finds the most semantically similar entry. If it's a strong match, it returns the stored answer. If not, it triggers a fallback.
 
-**Key Components:**
-- **API Endpoints:**
-  - `POST /chat` - Processes user questions through RAG pipeline
-  - `POST /login` - User authentication
-  - `POST /signup` - User registration
-  - `GET /suggestions` - Returns suggested questions (20 questions)
-  - `GET /health` - Health check endpoint
+### 2. The Confidence Engine
+Every answer comes with a **Confidence Score**. We calculate this using **Cosine Similarity**:
+- We take the L2 distance from FAISS and convert it: `Score = 1 - (Distance² / 2)`.
+- **Exact Matches**: Questions from the "Suggested Questions" list typically score **95% - 100%**.
+- **The Threshold**: If a score falls below **25%**, the AI determines it doesn't have a reliable answer and provides a polite fallback message to prevent "hallucinations."
 
-**How it works:**
-```python
-@app.get("/suggestions")
-async def get_suggestions(n: int = 20):
-    """Returns suggested questions from RAG pipeline"""
-    rag = get_rag_pipeline()
-    questions = rag.get_suggested_questions(n)
-    return {"questions": questions}
-```
+### 3. The Design Philosophy
+The UI is built with a **Glassmorphism** aesthetic. This means:
+- **Frosted Glass**: Using `backdrop-filter: blur()`, cards appear as semi-transparent layers over the background.
+- **Depth**: Subtle borders and soft shadows create a sense of hierarchy and 3D space.
+- **Monospace Focus**: By using `Geist Mono` as the primary font, we give the app a technical, "command-center" feel that aligns with AI and engineering tools.
 
-**Why used:** Provides RESTful API for frontend-backend communication, handles authentication, and serves AI responses.
+### 4. Direct Navigation Flow
+To ensure the fastest possible user experience, we removed traditional landing pages. Once authenticated, users are dropped directly into the **Command Center (Chat)**. This minimizes friction and puts the core tool front and center.
 
 ---
 
-### 2. **`auth.py`** - Authentication Module
-**Purpose:** Handles user authentication with JSON file persistence
+## 🚀 Getting Started
 
-**Key Features:**
-- **Password hashing** using SHA-256
-- **User storage** in `users_db.json` (persistent across restarts)
-- **Login/Signup validation**
+### Prerequisites
+- Python 3.10+
+- Node.js 18+
 
-**How it works:**
-```python
-def load_users():
-    """Loads users from JSON file for persistence"""
-    if os.path.exists(USERS_DB_PATH):
-        with open(USERS_DB_PATH, 'r') as f:
-            return json.load(f)
-    return {}
-```
+### Setup
 
-**Why used:** Secure user management with persistent storage so users don't need to re-signup on every session.
+1. **Clone & Install Dependencies**
+   ```bash
+   git clone <repository-url>
+   cd Task_01
+   ```
 
----
+2. **Backend Setup**
+   ```bash
+   cd backend
+   python -m venv venv
+   source venv/bin/activate  # Windows: venv\Scripts\activate
+   pip install -r requirements.txt
+   uvicorn main:app --reload --port 8000
+   ```
 
-### 3. **`rag_pipeline.py`** - RAG (Retrieval-Augmented Generation) Engine
-**Purpose:** Core AI engine that processes questions and generates answers
+3. **Frontend Setup**
+   ```bash
+   cd frontend
+   npm install
+   npm run dev
+   ```
 
-**Key Components:**
-- **FAISS vector store** - For fast semantic search
-- **HuggingFace embeddings** - Converts text to vectors
-- **LangChain** - AI orchestration framework
-
-**How it works:**
-1. Loads Q&A data from `qa_dataset.json`
-2. Creates vector embeddings using HuggingFace
-3. Builds FAISS index for similarity search
-4. When asked a question:
-   - Converts question to vector
-   - Finds most similar content in knowledge base
-   - Returns relevant answer
-
-**Special feature:** Filters out greetings ("hi", "hello", "hey") from suggestions
-
-**Why used:** Enables accurate, context-aware AI responses based on documentation rather than making up answers.
+## 🛠️ Deployment Notes
+- The application uses `localhost:8000` as the default API endpoint.
+- For production, update the API URL in `frontend/app/login/page.tsx` and `frontend/app/chat/page.tsx`.
 
 ---
-
-### 4. **`users_db.json`** - User Database
-**Purpose:** Persistent storage for registered users
-
-**Structure:**
-```json
-{
-  "user@example.com": {
-    "name": "John",
-    "email": "user@example.com",
-    "password": "hashed_password"
-  }
-}
-```
-
-**Why used:** Maintains user accounts across server restarts.
-
----
-
-## 📁 **FRONTEND FILES** (`frontend/`)
-
-### 5. **`src/app/globals.css`** - Global Stylesheet
-**Purpose:** Centralized CSS styling for the entire application
-
-**Key Sections:**
-- **Navbar styles** (`.home-navbar`, `.navbar-logo-text`)
-- **Menu drawer** (`.menu-drawer`, `.menu-drawer-item`)
-- **Hero section** (`.hero-section`, `.hero-title`)
-- **Feature cards** (`.feature-card`)
-- **Chat components** (`.chat-input`, `.chat-send-btn`)
-- **Suggested questions** (`.suggested-sidebar`, `.suggested-item`)
-- **Animations** (`@keyframes jump`, `@keyframes slideFromBottom`)
-
-**Design principles:**
-- Monospace fonts throughout (15px)
-- Green gradient theme (#22c55e → #059669)
-- Glass morphism effects
-- Dark/light theme support
-- Responsive design
-
-**Why used:** Consistent styling across all pages with theme awareness and reduced Tailwind dependency.
-
----
-
-### 6. **`src/app/home/page.tsx`** - Home Page
-**Purpose:** Landing page showcasing platform features
-
-**Key Components:**
-- **Hero section** - Welcome message with typing animation
-- **Feature cards** - Smart Q&A, RAG Technology, Lightning Fast
-- **About section** - Platform description
-- **Navigation** - CSS-only navbar with menu drawer
-- **Scroll indicator** - Animated "Scroll to explore" with jump effect
-
-**Special features:**
-- **Scroll-triggered animations** using Intersection Observer
-- **Dark/light theme toggle**
-- **Responsive design** (mobile-friendly)
-
-**Why used:** First impression page that explains the platform and guides users to the chatbot.
-
----
-
-### 7. **`src/app/chat/page.tsx`** - Chat Interface
-**Purpose:** Main AI conversation interface
-
-**Key Components:**
-- **Message container** - Displays chat history (30px height, monospace font)
-- **Input field** - User message input (`.chat-input`)
-- **Send button** - Gradient green button with glow effect (`.chat-send-btn`)
-- **Suggested questions sidebar** - 20 clickable questions (dynamic height, 3px gap)
-- **Menu drawer** - Theme toggle, logout, navigation
-
-**Styling details:**
-- Messages: 3px padding, 15px monospace font
-- Send button: 40px height, neon glow on hover
-- Suggested questions: min-height 30px, auto-expand based on text length
-
-**Why used:** Core user interaction point where users ask questions and get AI-powered answers.
-
----
-
-### 8. **`src/app/login/page.tsx`** - Login/Signup Page
-**Purpose:** User authentication interface
-
-**Key Features:**
-- **Dual-mode form** - Toggle between login and signup
-- **Typing animation** - "Join us today" text effect
-- **Glass morphism card** - Frosted glass effect
-- **Green gradient buttons** - Consistent branding
-
-**How it works:**
-1. User enters credentials
-2. Sends POST request to `/login` or `/signup`
-3. Stores user data in localStorage on success
-4. Redirects to home page
-
-**Why used:** Secure entry point with persistent authentication.
-
----
-
-## 📁 **DATA FILES** (`data/`)
-
-### 9. **`qa_dataset.json`** - Knowledge Base
-**Purpose:** Contains 40+ Q&A pairs for the AI to learn from
-
-**Content categories:**
-- Greetings (filtered out)
-- Platform information ("What is this platform?")
-- Technical details ("What is RAG?", "What is FAISS?")
-- Usage instructions ("How do I get started?")
-- Security ("Is my data secure?")
-- Integration ("Can I integrate this with my app?")
-
-**Structure:**
-```json
-[
-  {
-    "question": "What is RAG?",
-    "answer": "RAG stands for Retrieval-Augmented Generation..."
-  }
-]
-```
-
-**Why used:** Training data for the RAG pipeline - the AI searches this dataset to find relevant answers.
-
----
-
-## 🔧 **TECHNOLOGY STACK**
-
-### Backend:
-- **FastAPI** - Modern Python web framework
-- **LangChain** - AI orchestration
-- **FAISS** - Vector similarity search (Facebook AI)
-- **HuggingFace** - Text embeddings (all-MiniLM-L6-v2)
-- **NumPy** - Numerical computations
-
-### Frontend:
-- **Next.js 16** - React framework with App Router
-- **TypeScript** - Type-safe JavaScript
-- **Tailwind CSS** - Utility-first CSS (minimal usage now)
-- **Custom CSS** - Primary styling approach
-
-### AI/ML:
-- **Sentence Transformers** - Semantic understanding
-- **Vector embeddings** - Text-to-number conversion
-- **Similarity search** - Finding relevant content
-
----
-
-## 🎯 **HOW IT ALL WORKS TOGETHER**
-
-### User Flow:
-1. **Visit homepage** → Sees hero section with typing animation
-2. **Clicks "Open Chatbot"** → Goes to login/signup
-3. **Creates account** → Credentials stored in `users_db.json`
-4. **Enters chat** → Can ask questions or click suggested ones
-5. **AI processes** → Question → Embedding → FAISS search → Answer
-6. **Gets response** → Typed out character-by-character
-
-### Data Flow:
-```
-User Question
-    ↓
-Frontend (chat/page.tsx)
-    ↓
-Backend API (/chat endpoint)
-    ↓
-RAG Pipeline (rag_pipeline.py)
-    ↓
-Question → Embedding → FAISS Search
-    ↓
-Find similar Q&A in qa_dataset.json
-    ↓
-Return answer
-    ↓
-Display in chat interface
-```
-
----
-
-## 🎨 **DESIGN DECISIONS**
-
-1. **Monospace fonts** - Consistent, technical look (15px everywhere)
-2. **Green gradient** - Brand identity (#22c55e → #059669)
-3. **Glass morphism** - Modern, premium feel
-4. **Dark theme default** - Developer-friendly aesthetic
-5. **CSS-only approach** - Better performance, easier maintenance
-6. **Persistent auth** - Better UX (no re-login on refresh)
-7. **Greeting filtering** - More useful suggestions
-8. **Dynamic heights** - Better content display
-
----
-
-## 🚀 **KEY FEATURES**
-
-✅ Real-time AI chat with RAG technology  
-✅ 20 suggested questions (dynamic, expandable)  
-✅ Dark/light theme toggle  
-✅ Responsive design (mobile-friendly)  
-✅ Secure authentication with password hashing  
-✅ Persistent user storage  
-✅ Smooth animations and transitions  
-✅ Glow effects on hover  
-✅ Scroll-triggered animations  
-✅ Typing effect for AI responses  
-
----
-
-This project demonstrates a complete full-stack AI application with modern UI/UX, secure authentication, and intelligent RAG-powered responses!
+*Built for the NeuroStack GenAI Hackathon.*
