@@ -13,8 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SaaS Support Copilot - AI Support Assistant",
-  description: "AI-powered support assistant that retrieves relevant information from documentation and generates grounded answers.",
+  title: "NEURO COPILOT — AI Support Assistant",
+  description:
+    "AI-powered support assistant built with RAG technology. Get instant, accurate answers from our knowledge base.",
 };
 
 export default function RootLayout({

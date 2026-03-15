@@ -22,3 +22,4 @@ class ChatRequest(BaseModel):
 class ChatResponse(BaseModel):
     response: str
     success: bool
+    confidence: Optional[float] = None

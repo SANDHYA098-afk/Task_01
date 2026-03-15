@@ -84,28 +84,27 @@ class RAGPipeline:
             Tuple of (response, similarity_score)
         """
         if not self.vector_store:
-            return "Sorry, I couldn't find an answer for that.", 0.0
+            return "Sorry, I could not find an answer for that. Please ask questions related to our platform.", 0.0
         
         # Perform similarity search
         results = self.vector_store.similarity_search_with_score(query, k=k)
         
         if not results:
-            return "Sorry, I couldn't find an answer for that.", 0.0
+            return "Sorry, I could not find an answer for that. Please ask questions related to our platform.", 0.0
         
         # Get the most similar result
         best_doc, best_score = results[0]
         
-        # Convert distance to similarity score (FAISS uses L2 distance)
-        # Lower distance = higher similarity
-        # We'll use a simple conversion: similarity = 1 / (1 + distance)
-        similarity = 1 / (1 + best_score)
+        # Convert L2 distance to cosine similarity for normalized embeddings
+        # For normalized vectors: L2² = 2 - 2*cos_sim → cos_sim = 1 - (L2² / 2)
+        similarity = max(0.0, 1 - (best_score / 2))
         
         # Check if similarity meets threshold
         if similarity < self.similarity_threshold:
-            return "Sorry, I couldn't find an answer for that.", similarity
+            return "Sorry, I could not find an answer for that. Please ask questions related to our platform.", similarity
         
         # Return the answer from metadata
-        answer = best_doc.metadata.get('answer', "Sorry, I couldn't find an answer for that.")
+        answer = best_doc.metadata.get('answer', "Sorry, I could not find an answer for that. Please ask questions related to our platform.")
         
         return answer, similarity
     
@@ -144,6 +143,6 @@ def get_rag_pipeline() -> RAGPipeline:
         parent_dir = os.path.dirname(current_dir)
         data_path = os.path.join(parent_dir, 'data', 'qa_dataset.json')
         
-        _rag_pipeline = RAGPipeline(data_path=data_path, similarity_threshold=0.3)
+        _rag_pipeline = RAGPipeline(data_path=data_path, similarity_threshold=0.25)
     
     return _rag_pipeline

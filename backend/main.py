@@ -57,13 +57,15 @@ async def chat(request: ChatRequest):
         
         return ChatResponse(
             response=response,
-            success=True
+            success=True,
+            confidence=round(similarity * 100, 1)
         )
     except Exception as e:
         # Fallback response if RAG fails
         return ChatResponse(
-            response="Sorry, I couldn't find an answer for that.",
-            success=False
+            response="Sorry, I could not find an answer for that. Please ask questions related to our platform.",
+            success=False,
+            confidence=0.0
         )
 
 @app.get("/suggestions")
