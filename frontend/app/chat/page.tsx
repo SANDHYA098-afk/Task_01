@@ -55,7 +55,7 @@ export default function ChatPage() {
 
   /* ── Auth guard & initial data ───────────────────────── */
   useEffect(() => {
-    const stored = localStorage.getItem("user");
+    const stored = sessionStorage.getItem("user");
     if (!stored) {
       router.replace("/login");
       return;
@@ -84,16 +84,25 @@ export default function ChatPage() {
 
   const fetchSuggestions = async () => {
     try {
-      const res = await fetch("http://localhost:8000/suggestions?n=20");
+      const res = await fetch("https://sandytech-neurocopilot-backend.hf.space/suggestions?n=20");
+      if (!res.ok) throw new Error("Fetch failed");
       const data = await res.json();
-      setSuggestions(data.questions || []);
-    } catch {
+      if (data && Array.isArray(data.questions) && data.questions.length > 0) {
+        setSuggestions(data.questions);
+      } else {
+        throw new Error("Empty or invalid format");
+      }
+    } catch (err) {
+      console.error("Suggestions fetch error:", err);
       setSuggestions([
         "What is this platform?",
         "How does the AI assistant work?",
         "What is RAG?",
         "How do I get started?",
         "What features are available?",
+        "Is my data secure?",
+        "What technologies power this system?",
+        "How accurate are the responses?",
       ]);
     }
   };
@@ -113,7 +122,7 @@ export default function ChatPage() {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:8000/chat", {
+      const res = await fetch("https://sandytech-neurocopilot-backend.hf.space/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: text.trim() }),
@@ -153,7 +162,7 @@ export default function ChatPage() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("user");
+    sessionStorage.removeItem("user");
     router.push("/login");
   };
 

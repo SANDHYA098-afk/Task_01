@@ -50,24 +50,31 @@ export default function LoginPage() {
   useEffect(() => {
     setMounted(true);
     // If already logged in, redirect
-    const user = localStorage.getItem("user");
+    const user = sessionStorage.getItem("user");
     if (user) router.replace("/chat");
   }, [router]);
 
-  /* ── Auth handlers ──────────────────────────────────── */
+  /* ── Auth helpers ──────────────────────────────────── */
+  const validatePassword = (pw: string) => {
+    if (pw.length < 8) return "Password must be at least 8 characters long.";
+    if (!/[A-Z]/.test(pw)) return "Password must contain at least one uppercase letter.";
+    if (!/[0-9]/.test(pw)) return "Password must contain at least one number.";
+    return null;
+  };
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:8000/login", {
+      const res = await fetch("https://sandytech-neurocopilot-backend.hf.space/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
       const data = await res.json();
       if (res.ok) {
-        localStorage.setItem("user", JSON.stringify(data.user));
+        sessionStorage.setItem("user", JSON.stringify(data.user));
         router.push("/chat");
       } else {
         setError(data.detail || "Login failed. Please try again.");
@@ -82,16 +89,23 @@ export default function LoginPage() {
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+
+    const pwError = validatePassword(password);
+    if (pwError) {
+      setError(pwError);
+      return;
+    }
+
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:8000/signup", {
+      const res = await fetch("https://sandytech-neurocopilot-backend.hf.space/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),
       });
       const data = await res.json();
       if (res.ok) {
-        localStorage.setItem("user", JSON.stringify(data.user));
+        sessionStorage.setItem("user", JSON.stringify(data.user));
         router.push("/chat");
       } else {
         setError(data.detail || "Signup failed. Please try again.");

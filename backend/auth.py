@@ -24,6 +24,16 @@ def hash_password(password: str) -> str:
     """Hash password using SHA-256"""
     return hashlib.sha256(password.encode()).hexdigest()
 
+def validate_password(password: str) -> bool:
+    """Check if password meets complexity requirements"""
+    if len(password) < 8:
+        return False
+    if not any(char.isupper() for char in password):
+        return False
+    if not any(char.isdigit() for char in password):
+        return False
+    return True
+
 def signup_user(user: UserSignup) -> UserResponse:
     """Register a new user"""
     users_db = load_users()
@@ -32,6 +42,12 @@ def signup_user(user: UserSignup) -> UserResponse:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Email already registered"
+        )
+    
+    if not validate_password(user.password):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Password must be at least 8 characters long and contain at least one uppercase letter and one number"
         )
     
     hashed_password = hash_password(user.password)

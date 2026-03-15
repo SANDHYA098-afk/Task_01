@@ -138,10 +138,23 @@ def get_rag_pipeline() -> RAGPipeline:
     global _rag_pipeline
     
     if _rag_pipeline is None:
-        # Get the path to the data file
+        # Try multiple potential paths for the data file
         current_dir = os.path.dirname(os.path.abspath(__file__))
         parent_dir = os.path.dirname(current_dir)
-        data_path = os.path.join(parent_dir, 'data', 'qa_dataset.json')
+        
+        possible_paths = [
+            os.path.join(parent_dir, 'data', 'qa_dataset.json'),
+            os.path.join(current_dir, 'data', 'qa_dataset.json'),
+            os.path.join(current_dir, '..', 'data', 'qa_dataset.json'),
+            'data/qa_dataset.json',
+            '/app/data/qa_dataset.json'
+        ]
+        
+        data_path = possible_paths[0]
+        for path in possible_paths:
+            if os.path.exists(path):
+                data_path = path
+                break
         
         _rag_pipeline = RAGPipeline(data_path=data_path, similarity_threshold=0.25)
     

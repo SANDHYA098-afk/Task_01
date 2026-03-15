@@ -25,6 +25,7 @@
 
 ### 3. Integrated Authentication
 - **Dual Mode Form**: Seamless, animated transition between Login and Signup.
+- **Security**: Mandatory password complexity (8+ characters, 1 uppercase, 1 number).
 - **Session Persistence**: Automatic redirection to Chat after login, with user data stored in LocalStorage.
 - **Theme Toggle**: Persistence-based Dark/Light mode switcher available globally.
 
