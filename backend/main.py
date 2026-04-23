@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from models import UserSignup, UserLogin, UserResponse, ChatRequest, ChatResponse
@@ -5,6 +6,9 @@ from auth import signup_user, login_user
 from rag_pipeline import get_rag_pipeline
 from contextlib import asynccontextmanager
 from typing import List
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Lifespan context manager for startup/shutdown events
 @asynccontextmanager
@@ -25,10 +29,16 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="SaaS Support Copilot API", lifespan=lifespan)
 
-# Configure CORS for frontend connection
+# Configure CORS for frontend connection.
+# CORS_ORIGINS env var is comma-separated. Defaults to localhost for dev.
+_cors_origins = [
+    o.strip()
+    for o in os.getenv("CORS_ORIGINS", "http://localhost:3000").split(",")
+    if o.strip()
+]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=_cors_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

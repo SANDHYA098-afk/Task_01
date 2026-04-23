@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -m py_compile groq_client.py)",
+      "Bash(python -m py_compile rag_pipeline.py)",
+      "Bash(py --version)",
+      "Bash(python -m venv .venv)",
+      "Bash(.venv/Scripts/python.exe -m pip install --upgrade pip)",
+      "Bash(.venv/Scripts/python.exe -m pip install -r requirements.txt)",
+      "Bash(python -c \"import json; d = json.load\\(open\\('../data/qa_dataset.json', encoding='utf-8'\\)\\); [print\\(repr\\(x['question']\\)\\) for x in d[:10]]\")",
+      "Bash(python -c \"import json; d = json.load\\(open\\('data/qa_dataset.json', encoding='utf-8'\\)\\); print\\(f'Total: {len\\(d\\)} entries'\\); [print\\(repr\\(x['question']\\)\\) for x in d[:10]]\")"
+    ]
+  }
+}

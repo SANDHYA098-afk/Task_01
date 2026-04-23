@@ -8,5 +8,10 @@
     "name": "abu",
     "email": "abu@gmail.com",
     "password": "9b56ca8566a48b98a8c29a7fd307038ed555123439a937eb85d9c45166881e6e"
+  },
+  "sandytest001@gmail.com": {
+    "name": "SANDY_TEST_001",
+    "email": "sandytest001@gmail.com",
+    "password": "6906c8fa82c90f78f46773a956cb70b72986acde7f285d6c060eb2abd0b9479f"
   }
 }

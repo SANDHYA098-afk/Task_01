@@ -74,39 +74,74 @@ class RAGPipeline:
     
     def get_response(self, query: str, k: int = 3) -> Tuple[str, float]:
         """
-        Get response for a query using semantic search.
-        
-        Args:
-            query: User's question
-            k: Number of top results to consider
-            
-        Returns:
-            Tuple of (response, similarity_score)
+        Retrieve top-k chunks from FAISS, then call Groq to generate a grounded answer.
+        Below the confidence threshold, skip Groq and return a canned fallback.
         """
+        from groq_client import generate_answer, GroqError, is_configured
+
         if not self.vector_store:
-            return "Sorry, I could not find an answer for that. Please ask questions related to our platform.", 0.0
-        
-        # Perform similarity search
+            return (
+                "Sorry, I could not find an answer for that. Please ask questions related to our platform.",
+                0.0,
+            )
+
         results = self.vector_store.similarity_search_with_score(query, k=k)
-        
         if not results:
-            return "Sorry, I could not find an answer for that. Please ask questions related to our platform.", 0.0
-        
-        # Get the most similar result
+            return (
+                "Sorry, I could not find an answer for that. Please ask questions related to our platform.",
+                0.0,
+            )
+
         best_doc, best_score = results[0]
-        
         # Convert L2 distance to cosine similarity for normalized embeddings
-        # For normalized vectors: L2² = 2 - 2*cos_sim → cos_sim = 1 - (L2² / 2)
         similarity = max(0.0, 1 - (best_score / 2))
-        
-        # Check if similarity meets threshold
+
         if similarity < self.similarity_threshold:
-            return "Sorry, I could not find an answer for that. Please ask questions related to our platform.", similarity
-        
-        # Return the answer from metadata
-        answer = best_doc.metadata.get('answer', "Sorry, I could not find an answer for that. Please ask questions related to our platform.")
-        
-        return answer, similarity
+            return (
+                "Sorry, I could not find an answer for that. Please ask questions related to our platform.",
+                similarity,
+            )
+
+        # If Groq isn't configured, fall back to verbatim answer (existing behavior).
+        if not is_configured():
+            answer = best_doc.metadata.get(
+                "answer",
+                "Sorry, I could not find an answer for that. Please ask questions related to our platform.",
+            )
+            return answer, similarity
+
+        # Build context from all retrieved chunks and call Groq.
+        context_blocks = []
+        for doc, _score in results:
+            q = doc.metadata.get("question", "")
+            a = doc.metadata.get("answer", "")
+            context_blocks.append(f"Q: {q}\nA: {a}")
+        context = "\n\n".join(context_blocks)
+
+        system_prompt = (
+            "You are NeuroCopilot, a helpful support assistant. "
+            "Answer the user's question using ONLY the context provided below. "
+            "If the context doesn't contain the answer, say "
+            '"I could not find that in our knowledge base — could you rephrase?" '
+            "Be concise and direct. Do not invent facts. "
+            'Do not mention the word "context" in your reply.'
+        )
+        user_msg = f"Context:\n{context}\n\nQuestion: {query}"
+
+        try:
+            generated = generate_answer([
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_msg},
+            ])
+        except GroqError:
+            # Graceful fallback — return verbatim answer so the user still gets something useful
+            answer = best_doc.metadata.get(
+                "answer",
+                "The assistant is busy right now — please try again in a moment.",
+            )
+            return answer, similarity
+
+        return generated, similarity
     
     def get_suggested_questions(self, n: int = 20) -> List[str]:
         """
