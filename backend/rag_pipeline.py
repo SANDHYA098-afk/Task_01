@@ -178,11 +178,14 @@ def get_rag_pipeline() -> RAGPipeline:
         parent_dir = os.path.dirname(current_dir)
         
         possible_paths = [
+            os.path.join(current_dir, 'qa_dataset.json'),       # HF Space layout: dataset at root
             os.path.join(parent_dir, 'data', 'qa_dataset.json'),
             os.path.join(current_dir, 'data', 'qa_dataset.json'),
             os.path.join(current_dir, '..', 'data', 'qa_dataset.json'),
+            'qa_dataset.json',
             'data/qa_dataset.json',
-            '/app/data/qa_dataset.json'
+            '/app/qa_dataset.json',
+            '/app/data/qa_dataset.json',
         ]
         
         data_path = possible_paths[0]

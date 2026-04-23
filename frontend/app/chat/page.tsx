@@ -151,6 +151,7 @@ export default function ChatPage() {
 
   const handleSuggestionClick = (q: string) => {
     sendMessage(q);
+    setSidebarOpen(false);
     inputRef.current?.focus();
   };
 
@@ -166,10 +167,24 @@ export default function ChatPage() {
     router.push("/login");
   };
 
+  // Lock body scroll when mobile drawer is open
+  useEffect(() => {
+    if (sidebarOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [sidebarOpen]);
+
   if (!user) return null;
 
+  const userInitial = user.name?.[0]?.toUpperCase() ?? "U";
+
   return (
-    <div style={{ minHeight: "100vh", background: "var(--bg)", display: "flex", flexDirection: "column" }}>
+    <div style={{ minHeight: "100dvh", background: "var(--bg)", display: "flex", flexDirection: "column" }}>
       {/* ═══ Navbar ═══ */}
       <nav className="navbar">
         <div className="navbar-logo">
@@ -187,37 +202,75 @@ export default function ChatPage() {
         </div>
 
         <button
-          className="md:hidden"
-          onClick={() => setSidebarOpen(true)}
-          style={{ background: "none", border: "none", color: "var(--fg)", fontSize: 22, cursor: "pointer" }}
+          className={`hamburger md:hidden ${sidebarOpen ? "open" : ""}`}
+          onClick={() => setSidebarOpen((v) => !v)}
+          aria-label={sidebarOpen ? "Close menu" : "Open menu"}
+          aria-expanded={sidebarOpen}
         >
-          ☰
+          <span className="hamburger-bar" />
+          <span className="hamburger-bar" />
+          <span className="hamburger-bar" />
         </button>
       </nav>
 
-      {/* ═══ Mobile Sidebar ═══ */}
-      <div className={`sidebar-overlay ${sidebarOpen ? "open" : ""}`} onClick={() => setSidebarOpen(false)} />
-      <div className={`sidebar ${sidebarOpen ? "open" : ""}`}>
-        <div style={{ marginBottom: 32 }}>
-          <div style={{ fontSize: 16, fontWeight: 700, color: "var(--accent)", marginBottom: 4 }}>
-            ⚡ NEURO COPILOT
+      {/* ═══ Mobile Drawer ═══ */}
+      <div className={`drawer-overlay ${sidebarOpen ? "open" : ""}`} onClick={() => setSidebarOpen(false)} />
+      <aside className={`drawer ${sidebarOpen ? "open" : ""}`} aria-hidden={!sidebarOpen}>
+        {/* User identity */}
+        <div className="drawer-identity">
+          <div className="drawer-avatar">{userInitial}</div>
+          <div style={{ minWidth: 0, flex: 1 }}>
+            <div className="drawer-identity-name">{user.name}</div>
+            <div className="drawer-identity-email">{user.email}</div>
           </div>
-          <div style={{ fontSize: 13, color: "var(--fg-muted)" }}>{user.email}</div>
         </div>
 
-        <button className="sidebar-item" onClick={toggleTheme}>
-          {theme === "dark" ? "☀️" : "🌙"} Toggle Theme
-        </button>
-        <div style={{ flex: 1 }} />
-        <button className="sidebar-item" onClick={handleLogout} style={{ color: "#f87171" }}>
-          🚪 Logout
-        </button>
-      </div>
+        {/* Suggested questions */}
+        <div className="drawer-section">
+          <div className="drawer-section-label">
+            <span style={{ fontSize: 14 }}>💡</span>
+            Suggested Questions
+          </div>
+          <div className="drawer-suggestions">
+            {suggestions.length === 0 ? (
+              <div style={{ fontSize: 13, color: "var(--fg-muted)", padding: "12px 4px" }}>
+                Loading suggestions…
+              </div>
+            ) : (
+              suggestions.map((q, i) => (
+                <button
+                  key={i}
+                  className="suggestion-chip"
+                  onClick={() => handleSuggestionClick(q)}
+                  style={{ animationDelay: `${i * 25}ms` }}
+                >
+                  {q}
+                </button>
+              ))
+            )}
+          </div>
+        </div>
+
+        {/* Settings footer */}
+        <div className="drawer-footer">
+          <button className="drawer-action" onClick={toggleTheme}>
+            <span className="drawer-action-icon">{theme === "dark" ? "☀️" : "🌙"}</span>
+            <span>{theme === "dark" ? "Light theme" : "Dark theme"}</span>
+          </button>
+          <button className="drawer-action danger" onClick={handleLogout}>
+            <span className="drawer-action-icon">↗</span>
+            <span>Sign out</span>
+          </button>
+        </div>
+      </aside>
 
       {/* ═══ Main Chat Area ═══ */}
-      <div style={{ display: "flex", flex: 1, marginTop: 60 }}>
+      <div className="chat-shell" style={{ display: "flex", flex: 1, marginTop: 60 }}>
         {/* Chat column */}
-        <div style={{ flex: 1, display: "flex", flexDirection: "column", height: "calc(100vh - 60px)" }}>
+        <div
+          className="chat-container"
+          style={{ flex: 1, display: "flex", flexDirection: "column", height: "calc(100dvh - 60px)" }}
+        >
           {/* Messages */}
           <div className="chat-messages" style={{ flex: 1, overflowY: "auto" }}>
             {messages.map((msg) => (

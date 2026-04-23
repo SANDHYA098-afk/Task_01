@@ -8,7 +8,12 @@
       "Bash(.venv/Scripts/python.exe -m pip install --upgrade pip)",
       "Bash(.venv/Scripts/python.exe -m pip install -r requirements.txt)",
       "Bash(python -c \"import json; d = json.load\\(open\\('../data/qa_dataset.json', encoding='utf-8'\\)\\); [print\\(repr\\(x['question']\\)\\) for x in d[:10]]\")",
-      "Bash(python -c \"import json; d = json.load\\(open\\('data/qa_dataset.json', encoding='utf-8'\\)\\); print\\(f'Total: {len\\(d\\)} entries'\\); [print\\(repr\\(x['question']\\)\\) for x in d[:10]]\")"
+      "Bash(python -c \"import json; d = json.load\\(open\\('data/qa_dataset.json', encoding='utf-8'\\)\\); print\\(f'Total: {len\\(d\\)} entries'\\); [print\\(repr\\(x['question']\\)\\) for x in d[:10]]\")",
+      "Bash(git -C /c/Users/Admin/Desktop/hf-deploy restore --staged users_db.json)",
+      "Bash(git -C /c/Users/Admin/Desktop/hf-deploy checkout -- users_db.json)",
+      "Bash(git -C /c/Users/Admin/Desktop/hf-deploy status --short)",
+      "Bash(git -C /c/Users/Admin/Desktop/hf-deploy -c user.email=dhiyaa8917@gmail.com -c user.name=SANDHYA098-afk commit -m 'feat: add Groq RAG generation, env-driven CORS *)",
+      "Bash(python -c ' *)"
     ]
   }
 }
