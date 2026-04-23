@@ -84,7 +84,7 @@ export default function ChatPage() {
 
   const fetchSuggestions = async () => {
     try {
-      const res = await fetch("https://sandytech-neurocopilot-backend.hf.space/suggestions?n=20");
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000"}/suggestions?n=20`);
       if (!res.ok) throw new Error("Fetch failed");
       const data = await res.json();
       if (data && Array.isArray(data.questions) && data.questions.length > 0) {
@@ -122,7 +122,7 @@ export default function ChatPage() {
     setLoading(true);
 
     try {
-      const res = await fetch("https://sandytech-neurocopilot-backend.hf.space/chat", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000"}/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: text.trim() }),
